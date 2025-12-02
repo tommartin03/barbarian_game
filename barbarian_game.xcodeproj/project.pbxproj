@@ -6,17 +6,18 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3BE837FD2EDF1625003A9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BE837FA2EDF1625003A9D6C /* Assets.xcassets */; };
+		3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE837FC2EDF1625003A9D6C /* ContentView.swift */; };
+		3BE837FF2EDF1625003A9D6C /* barbarian_gameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		3BE837DD2EDF13C4003A9D6C /* barbarian_game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = barbarian_game.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BE837FA2EDF1625003A9D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barbarian_gameApp.swift; sourceTree = "<group>"; };
+		3BE837FC2EDF1625003A9D6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		3BE837DF2EDF13C4003A9D6C /* barbarian_game */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = barbarian_game;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3BE837DA2EDF13C4003A9D6C /* Frameworks */ = {
@@ -32,8 +33,15 @@
 		3BE837D42EDF13C4003A9D6C = {
 			isa = PBXGroup;
 			children = (
-				3BE837DF2EDF13C4003A9D6C /* barbarian_game */,
+				3BE838062EDF16B9003A9D6C /* Resources */,
+				3BE838052EDF16B1003A9D6C /* Utils */,
+				3BE838042EDF16AB003A9D6C /* Networking */,
+				3BE838032EDF16A5003A9D6C /* Services */,
+				3BE838022EDF169D003A9D6C /* ViewModels */,
+				3BE838012EDF1691003A9D6C /* Views */,
+				3BE838002EDF1684003A9D6C /* Models */,
 				3BE837DE2EDF13C4003A9D6C /* Products */,
+				3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +51,65 @@
 				3BE837DD2EDF13C4003A9D6C /* barbarian_game.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3BE838002EDF1684003A9D6C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3BE838012EDF1691003A9D6C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3BE838072EDF1705003A9D6C /* Root */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3BE838022EDF169D003A9D6C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3BE838032EDF16A5003A9D6C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3BE838042EDF16AB003A9D6C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3BE838052EDF16B1003A9D6C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3BE838062EDF16B9003A9D6C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3BE837FA2EDF1625003A9D6C /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3BE838072EDF1705003A9D6C /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				3BE837FC2EDF1625003A9D6C /* ContentView.swift */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +126,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				3BE837DF2EDF13C4003A9D6C /* barbarian_game */,
 			);
 			name = barbarian_game;
 			packageProductDependencies = (
@@ -109,6 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE837FD2EDF1625003A9D6C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +184,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */,
+				3BE837FF2EDF1625003A9D6C /* barbarian_gameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
