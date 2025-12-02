@@ -17,6 +17,10 @@
 		3BE837FA2EDF1625003A9D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barbarian_gameApp.swift; sourceTree = "<group>"; };
 		3BE837FC2EDF1625003A9D6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3BE838082EDF182D003A9D6C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3BE838092EDF183B003A9D6C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		3BE8380A2EDF1855003A9D6C /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		3BE8380B2EDF1878003A9D6C /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		3BE838002EDF1684003A9D6C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3BE838082EDF182D003A9D6C /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -71,6 +76,7 @@
 		3BE838022EDF169D003A9D6C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3BE838092EDF183B003A9D6C /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -78,6 +84,7 @@
 		3BE838032EDF16A5003A9D6C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8380A2EDF1855003A9D6C /* TokenManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -85,6 +92,7 @@
 		3BE838042EDF16AB003A9D6C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8380B2EDF1878003A9D6C /* APIEndpoints.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
