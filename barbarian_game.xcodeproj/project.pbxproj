@@ -22,6 +22,13 @@
 		3BE8382C2EDF1D5B003A9D6C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838082EDF182D003A9D6C /* User.swift */; };
 		3BE8382E2EE03F63003A9D6C /* ServerErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */; };
 		3BE838332EE04309003A9D6C /* BarbarianManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */; };
+		3BF8BAED2EE07CAC006DB9E2 /* BarbarianRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */; };
+		3BF8BAEF2EE0805F006DB9E2 /* BarbarianViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */; };
+		3BF8BAF12EE0809F006DB9E2 /* CreateBarbarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */; };
+		3BF8BAF32EE080C3006DB9E2 /* BarbarianDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF22EE080C2006DB9E2 /* BarbarianDetailView.swift */; };
+		3BF8BAF72EE0880A006DB9E2 /* AvatarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */; };
+		3BF8BAF92EE09B02006DB9E2 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */; };
+		3BF8BAFB2EE0B15D006DB9E2 /* Barbarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +48,13 @@
 		3BE838132EDF1A12003A9D6C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorResponse.swift; sourceTree = "<group>"; };
 		3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianManagementView.swift; sourceTree = "<group>"; };
+		3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianRepository.swift; sourceTree = "<group>"; };
+		3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianViewModel.swift; sourceTree = "<group>"; };
+		3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBarbarianView.swift; sourceTree = "<group>"; };
+		3BF8BAF22EE080C2006DB9E2 /* BarbarianDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianDetailView.swift; sourceTree = "<group>"; };
+		3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRepository.swift; sourceTree = "<group>"; };
+		3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barbarian.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +94,7 @@
 		3BE838002EDF1684003A9D6C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */,
 				3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */,
 				3BE8380E2EDF197C003A9D6C /* AuthResponse.swift */,
 				3BE838082EDF182D003A9D6C /* User.swift */,
@@ -100,6 +115,8 @@
 		3BE838022EDF169D003A9D6C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */,
+				3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */,
 				3BE838092EDF183B003A9D6C /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
@@ -116,6 +133,8 @@
 		3BE838042EDF16AB003A9D6C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */,
+				3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */,
 				3BE8380F2EDF19BD003A9D6C /* AuthRepository.swift */,
 				3BE8380D2EDF195D003A9D6C /* APIError.swift */,
 				3BE8380C2EDF1950003A9D6C /* APIClient.swift */,
@@ -159,6 +178,8 @@
 		3BE8382F2EE042E7003A9D6C /* Barbarian */ = {
 			isa = PBXGroup;
 			children = (
+				3BF8BAF22EE080C2006DB9E2 /* BarbarianDetailView.swift */,
+				3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */,
 				3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */,
 			);
 			path = Barbarian;
@@ -237,15 +258,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE8382A2EDF1D49003A9D6C /* AuthViewModel.swift in Sources */,
+				3BF8BAFB2EE0B15D006DB9E2 /* Barbarian.swift in Sources */,
+				3BF8BAEF2EE0805F006DB9E2 /* BarbarianViewModel.swift in Sources */,
 				3BE838122EDF1A0A003A9D6C /* LoginView.swift in Sources */,
 				3BE838142EDF1A19003A9D6C /* RegisterView.swift in Sources */,
 				3BE838252EDF1D29003A9D6C /* TokenManager.swift in Sources */,
+				3BF8BAF92EE09B02006DB9E2 /* MenuView.swift in Sources */,
 				3BE838292EDF1D43003A9D6C /* APIEndpoints.swift in Sources */,
+				3BF8BAED2EE07CAC006DB9E2 /* BarbarianRepository.swift in Sources */,
 				3BE838282EDF1D3E003A9D6C /* APIClient.swift in Sources */,
+				3BF8BAF72EE0880A006DB9E2 /* AvatarRepository.swift in Sources */,
 				3BE838332EE04309003A9D6C /* BarbarianManagementView.swift in Sources */,
 				3BE838262EDF1D34003A9D6C /* AuthRepository.swift in Sources */,
 				3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */,
 				3BE8382C2EDF1D5B003A9D6C /* User.swift in Sources */,
+				3BF8BAF32EE080C3006DB9E2 /* BarbarianDetailView.swift in Sources */,
+				3BF8BAF12EE0809F006DB9E2 /* CreateBarbarianView.swift in Sources */,
 				3BE8382B2EDF1D56003A9D6C /* AuthResponse.swift in Sources */,
 				3BE8382E2EE03F63003A9D6C /* ServerErrorResponse.swift in Sources */,
 				3BE837FF2EDF1625003A9D6C /* barbarian_gameApp.swift in Sources */,

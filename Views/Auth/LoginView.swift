@@ -8,41 +8,61 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var vm = AuthViewModel()
-    @State private var navigateToBarbarian = false
+    @StateObject private var authVM = AuthViewModel()
+    @StateObject private var barbarianVM = BarbarianViewModel()
+    @State private var navigateToNext = false
+    @State private var nextDestination: AnyView = AnyView(EmptyView())
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                TextField("Username", text: $vm.username)
+                TextField("Username", text: $authVM.username)
                     .textFieldStyle(.roundedBorder)
                     .autocapitalization(.none)
-                    .textInputAutocapitalization(.never)
                     .autocorrectionDisabled(true)
 
-                SecureField("Password", text: $vm.password)
+                SecureField("Password", text: $authVM.password)
                     .textFieldStyle(.roundedBorder)
 
-                if !vm.errorMessage.isEmpty {
-                    Text(vm.errorMessage)
+                if !authVM.errorMessage.isEmpty {
+                    Text(authVM.errorMessage)
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
                 }
 
                 Button("Login") {
                     Task {
-                        await vm.login()
-                        if vm.isAuthenticated {
-                            navigateToBarbarian = true
+                        await authVM.login()
+                        if authVM.isAuthenticated {
+                            // Charger le barbare existant
+                            await barbarianVM.loadBarbarian()
+
+                            // Afficher dans la console ce qui a été chargé
+                            if let barbarian = barbarianVM.barbarian {
+                                print("Barbare chargé :", barbarian)
+                            } else {
+                                print("Aucun barbare trouvé")
+                            }
+
+                            // Déterminer la vue suivante
+                            if let _ = barbarianVM.barbarian {
+                                nextDestination = AnyView(MenuView().environmentObject(barbarianVM))
+                            } else {
+                                nextDestination = AnyView(CreateBarbarianView().environmentObject(barbarianVM))
+                            }
+
+                            navigateToNext = true
                         }
                     }
                 }
 
+
                 NavigationLink("Register", destination: RegisterView())
 
+                // Navigation dynamique vers la vue suivante
                 NavigationLink(
-                    destination: BarbarianManagementView(),
-                    isActive: $navigateToBarbarian,
+                    destination: nextDestination,
+                    isActive: $navigateToNext,
                     label: { EmptyView() }
                 )
             }
