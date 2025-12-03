@@ -10,6 +10,18 @@
 		3BE837FD2EDF1625003A9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BE837FA2EDF1625003A9D6C /* Assets.xcassets */; };
 		3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE837FC2EDF1625003A9D6C /* ContentView.swift */; };
 		3BE837FF2EDF1625003A9D6C /* barbarian_gameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */; };
+		3BE838122EDF1A0A003A9D6C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838112EDF1A09003A9D6C /* LoginView.swift */; };
+		3BE838142EDF1A19003A9D6C /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838132EDF1A12003A9D6C /* RegisterView.swift */; };
+		3BE838252EDF1D29003A9D6C /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380A2EDF1855003A9D6C /* TokenManager.swift */; };
+		3BE838262EDF1D34003A9D6C /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380F2EDF19BD003A9D6C /* AuthRepository.swift */; };
+		3BE838272EDF1D39003A9D6C /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380D2EDF195D003A9D6C /* APIError.swift */; };
+		3BE838282EDF1D3E003A9D6C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380C2EDF1950003A9D6C /* APIClient.swift */; };
+		3BE838292EDF1D43003A9D6C /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380B2EDF1878003A9D6C /* APIEndpoints.swift */; };
+		3BE8382A2EDF1D49003A9D6C /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838092EDF183B003A9D6C /* AuthViewModel.swift */; };
+		3BE8382B2EDF1D56003A9D6C /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380E2EDF197C003A9D6C /* AuthResponse.swift */; };
+		3BE8382C2EDF1D5B003A9D6C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838082EDF182D003A9D6C /* User.swift */; };
+		3BE8382E2EE03F63003A9D6C /* ServerErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */; };
+		3BE838332EE04309003A9D6C /* BarbarianManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +33,14 @@
 		3BE838092EDF183B003A9D6C /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		3BE8380A2EDF1855003A9D6C /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		3BE8380B2EDF1878003A9D6C /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		3BE8380C2EDF1950003A9D6C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		3BE8380D2EDF195D003A9D6C /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		3BE8380E2EDF197C003A9D6C /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		3BE8380F2EDF19BD003A9D6C /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		3BE838112EDF1A09003A9D6C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3BE838132EDF1A12003A9D6C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorResponse.swift; sourceTree = "<group>"; };
+		3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianManagementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +80,8 @@
 		3BE838002EDF1684003A9D6C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */,
+				3BE8380E2EDF197C003A9D6C /* AuthResponse.swift */,
 				3BE838082EDF182D003A9D6C /* User.swift */,
 			);
 			path = Models;
@@ -68,6 +90,8 @@
 		3BE838012EDF1691003A9D6C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8382F2EE042E7003A9D6C /* Barbarian */,
+				3BE838102EDF19FC003A9D6C /* Auth */,
 				3BE838072EDF1705003A9D6C /* Root */,
 			);
 			path = Views;
@@ -92,6 +116,9 @@
 		3BE838042EDF16AB003A9D6C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8380F2EDF19BD003A9D6C /* AuthRepository.swift */,
+				3BE8380D2EDF195D003A9D6C /* APIError.swift */,
+				3BE8380C2EDF1950003A9D6C /* APIClient.swift */,
 				3BE8380B2EDF1878003A9D6C /* APIEndpoints.swift */,
 			);
 			path = Networking;
@@ -118,6 +145,23 @@
 				3BE837FC2EDF1625003A9D6C /* ContentView.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		3BE838102EDF19FC003A9D6C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				3BE838132EDF1A12003A9D6C /* RegisterView.swift */,
+				3BE838112EDF1A09003A9D6C /* LoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		3BE8382F2EE042E7003A9D6C /* Barbarian */ = {
+			isa = PBXGroup;
+			children = (
+				3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */,
+			);
+			path = Barbarian;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,8 +236,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE8382A2EDF1D49003A9D6C /* AuthViewModel.swift in Sources */,
+				3BE838122EDF1A0A003A9D6C /* LoginView.swift in Sources */,
+				3BE838142EDF1A19003A9D6C /* RegisterView.swift in Sources */,
+				3BE838252EDF1D29003A9D6C /* TokenManager.swift in Sources */,
+				3BE838292EDF1D43003A9D6C /* APIEndpoints.swift in Sources */,
+				3BE838282EDF1D3E003A9D6C /* APIClient.swift in Sources */,
+				3BE838332EE04309003A9D6C /* BarbarianManagementView.swift in Sources */,
+				3BE838262EDF1D34003A9D6C /* AuthRepository.swift in Sources */,
 				3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */,
+				3BE8382C2EDF1D5B003A9D6C /* User.swift in Sources */,
+				3BE8382B2EDF1D56003A9D6C /* AuthResponse.swift in Sources */,
+				3BE8382E2EE03F63003A9D6C /* ServerErrorResponse.swift in Sources */,
 				3BE837FF2EDF1625003A9D6C /* barbarian_gameApp.swift in Sources */,
+				3BE838272EDF1D39003A9D6C /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
