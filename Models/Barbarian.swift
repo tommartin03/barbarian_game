@@ -12,7 +12,7 @@ struct Barbarian: Codable {
     let avatar_id: Int
     let love: Int
     let exp: Int
-    let skill_points: Int
+    var skill_points: Int
     let attack: Int
     let defense: Int
     let accuracy: Int

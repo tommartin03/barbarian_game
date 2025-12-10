@@ -13,6 +13,7 @@ enum APIEndpoints {
     case create_or_reset_barbarian
     case get_my_barbarian
     case get_avatars
+    case spend_skill_points
 
     var url: URL {
         switch self {
@@ -26,12 +27,14 @@ enum APIEndpoints {
             return URL(string: "https://vps.vautard.fr/barbarians/ws/get_my_barbarian.php")!
         case .get_avatars:
             return URL(string: "https://vps.vautard.fr/barbarians/ws/avatars.php")!
+        case .spend_skill_points:
+            return URL(string: "https://vps.vautard.fr/barbarians/ws/spend_skill_points.php")!
         }
     }
 
     var method: String {
         switch self {
-        case .register, .login, .create_or_reset_barbarian:
+        case .register, .login, .create_or_reset_barbarian, .spend_skill_points:
             return "POST"
         case .get_my_barbarian, .get_avatars:
             return "GET"

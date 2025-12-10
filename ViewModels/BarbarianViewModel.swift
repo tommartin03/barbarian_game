@@ -11,6 +11,7 @@ class BarbarianViewModel: ObservableObject {
     @Published var barbarian: Barbarian? = nil
     @Published var avatars: [Avatar] = []
     @Published var isLoading = false
+    @Published var isUpdating = false // Pour gérer le loader sur ajout de point
 
     private let barbarianRepo = BarbarianRepository()
     private let avatarRepo = AvatarRepository()
@@ -44,7 +45,6 @@ class BarbarianViewModel: ObservableObject {
         if let avatar = avatars.first(where: { $0.id == bar.avatar_id }) {
             return avatar.fullURL
         }
-        // fallback si pas trouvé
         return URL(string: "https://vps.vautard.fr/barbarians/avatars/default.png")!
     }
 
@@ -62,5 +62,45 @@ class BarbarianViewModel: ObservableObject {
     func logout() {
         barbarian = nil
         // Supprimer token stocké si besoin
+    }
+    func addDebugPoints() {
+        barbarian?.skill_points += 10
+    }
+
+    // MARK: - Ajouter un point de compétence
+    func addPoint(to stat: String) {
+        guard let bar = barbarian, bar.skill_points > 0 else { return }
+        isUpdating = true
+        
+        Task {
+            var attack = 0
+            var defense = 0
+            var accuracy = 0
+            var evasion = 0
+            
+            switch stat {
+            case "attack": attack = 1
+            case "defense": defense = 1
+            case "accuracy": accuracy = 1
+            case "evasion": evasion = 1
+            default: break
+            }
+            
+            do {
+                try await barbarianRepo.spendSkillPoints(
+                    attack: attack,
+                    defense: defense,
+                    accuracy: accuracy,
+                    evasion: evasion
+                )
+                // Recharger le barbare pour mettre à jour les stats et skill_points
+                let updatedBar = try await barbarianRepo.getMyBarbarian()
+                self.barbarian = updatedBar
+            } catch {
+                print("Erreur lors de l'ajout d'un point :", error)
+            }
+            
+            isUpdating = false
+        }
     }
 }
