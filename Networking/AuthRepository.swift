@@ -21,6 +21,10 @@ class AuthRepository {
             body: ["username": username, "password": password]
         )
     }
+    
+    func logout() async throws -> AuthResponse {
+            try await APIClient.shared.request(.logout)
+        }
 }
 
 

@@ -67,4 +67,15 @@ class AuthViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         }
     }
+    
+    func logout() async {
+        do {
+            try await repository.logout()
+        } catch {
+            print("Erreur lors de la déconnexion API: \(error)")
+        }
+        
+        TokenManager.shared.clearToken()
+        isAuthenticated = false
+    }
 }

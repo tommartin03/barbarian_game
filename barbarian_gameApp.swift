@@ -9,12 +9,15 @@ import SwiftUI
 
 @main
 struct barbarian_gameApp: App {
-    @StateObject var vm = BarbarianViewModel()
+    @StateObject var authVm = AuthViewModel()
+    @StateObject var barbarianVm = BarbarianViewModel()
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
-                .environmentObject(vm)   // ⬅️ injection globale ici
+            RootView()
+                .environmentObject(authVm)
+                .environmentObject(barbarianVm)
         }
     }
 }
+
