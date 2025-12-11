@@ -12,6 +12,7 @@ class BarbarianViewModel: ObservableObject {
     @Published var avatars: [Avatar] = []
     @Published var isLoading = false
     @Published var isUpdating = false // Pour gérer le loader sur ajout de point
+    
 
     private let barbarianRepo = BarbarianRepository()
     private let avatarRepo = AvatarRepository()

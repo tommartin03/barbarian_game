@@ -9,9 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var authVm: AuthViewModel
-    @EnvironmentObject var barbarianVm: BarbarianViewModel
-    @State private var navigateToNext = false
-    @State private var nextDestination: AnyView = AnyView(EmptyView())
 
     var body: some View {
         NavigationStack {
@@ -31,39 +28,14 @@ struct LoginView: View {
                 }
 
                 Button("Login") {
-                    Task {
-                        await authVm.login()
-                        if authVm.isAuthenticated {
-                            // Charger le barbare existant
-                            await barbarianVm.loadBarbarian()
-
-                            // Afficher dans la console ce qui a été chargé
-                            if let barbarian = barbarianVm.barbarian {
-                                print("Barbare chargé :", barbarian)
-                            } else {
-                                print("Aucun barbare trouvé")
-                            }
-
-                            // Déterminer la vue suivante
-                            if let _ = barbarianVm.barbarian {
-                                nextDestination = AnyView(MenuView())
-                            } else {
-                                nextDestination = AnyView(CreateBarbarianView())
-                            }
-
-                            navigateToNext = true
-                        }
-                    }
+                    Task { await authVm.login() }
                 }
+                .buttonStyle(.borderedProminent) // bouton actif
 
-                NavigationLink("Register", destination: RegisterView())
-
-                // Navigation dynamique vers la vue suivante
-                NavigationLink(
-                    destination: nextDestination,
-                    isActive: $navigateToNext,
-                    label: { EmptyView() }
-                )
+                NavigationLink("Register") {
+                    RegisterView()
+                }
+                .buttonStyle(.bordered)
             }
             .padding()
         }
