@@ -118,13 +118,8 @@ struct MenuView: View {
                             do {
                                 let repo = FightRepository()
                                 let response = try await repo.startFight()
-                                print("✅ Combat terminé !")
-                                print("Adversaire: \(response.opponent.name)")
-                                print("Gagnant ID: \(response.winner_id)")
-                                print("EXP gagnée: \(response.exp_gain)")
-                                print("Nombre de rounds: \(response.log.rounds.count)")
                                 
-                                // Stocker la réponse et afficher la vue
+                                // Stocker la réponse et afficher la vue de déroulé
                                 fightResponse = response
                                 showFightResult = true
                                 
@@ -169,7 +164,7 @@ struct MenuView: View {
             }
             .navigationDestination(isPresented: $showFightResult) {
                 if let response = fightResponse {
-                    FightResultView(fightResponse: response)
+                    FightDetailView(fightResponse: response)
                         .environmentObject(vm)
                 }
             }
