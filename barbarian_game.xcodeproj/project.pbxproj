@@ -36,6 +36,7 @@
 		3BF8BAF72EE0880A006DB9E2 /* AvatarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */; };
 		3BF8BAF92EE09B02006DB9E2 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */; };
 		3BF8BAFB2EE0B15D006DB9E2 /* Barbarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */; };
+		3BF8BAFD2EEC2DB8006DB9E2 /* LeaderBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAFC2EEC2DAB006DB9E2 /* LeaderBoard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRepository.swift; sourceTree = "<group>"; };
 		3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barbarian.swift; sourceTree = "<group>"; };
+		3BF8BAFC2EEC2DAB006DB9E2 /* LeaderBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		3BE838042EDF16AB003A9D6C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3BF8BAFC2EEC2DAB006DB9E2 /* LeaderBoard.swift */,
 				3BE838392EEAD249003A9D6C /* FightRepository.swift */,
 				3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */,
 				3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */,
@@ -300,6 +303,7 @@
 				3BE8383A2EEAD24F003A9D6C /* FightRepository.swift in Sources */,
 				3BF8BAEF2EE0805F006DB9E2 /* BarbarianViewModel.swift in Sources */,
 				3BE8384F2EEC236C003A9D6C /* FightViewModel.swift in Sources */,
+				3BF8BAFD2EEC2DB8006DB9E2 /* LeaderBoard.swift in Sources */,
 				3BE838122EDF1A0A003A9D6C /* LoginView.swift in Sources */,
 				3BE838142EDF1A19003A9D6C /* RegisterView.swift in Sources */,
 				3BE838252EDF1D29003A9D6C /* TokenManager.swift in Sources */,

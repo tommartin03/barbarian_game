@@ -29,7 +29,7 @@ struct FightDetailView: View {
                 // Mon barbare
                 VStack {
                     if let myBar = vm.barbarian {
-                        AsyncImage(url: myBar.avatarURL) { image in
+                        AsyncImage(url: vm.avatarURL(for: myBar)) { image in
                             image.resizable().scaledToFill()
                         } placeholder: {
                             ProgressView()
@@ -49,7 +49,7 @@ struct FightDetailView: View {
                 
                 // Adversaire
                 VStack {
-                    AsyncImage(url: fightResponse.opponent.avatarURL) { image in
+                    AsyncImage(url: vm.avatarURL(for: fightResponse.opponent)) { image in
                         image.resizable().scaledToFill()
                     } placeholder: {
                         ProgressView()

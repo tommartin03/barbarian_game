@@ -21,7 +21,7 @@ struct MenuView: View {
             VStack(spacing: 20) {
                 if let bar = vm.barbarian {
                     // Avatar avec debug
-                    AsyncImage(url: bar.avatarURL) { phase in
+                    AsyncImage(url: vm.avatarURL(for: bar)) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -44,13 +44,13 @@ struct MenuView: View {
                                 Text("Erreur: avatar_id = \(bar.avatar_id)")
                                     .font(.caption)
                                     .foregroundColor(.red)
-                                Text("URL: \(bar.avatarURL.absoluteString)")
+                                Text("URL: \(vm.avatarURL(for: bar).absoluteString)")
                                     .font(.caption2)
                                     .foregroundColor(.gray)
                             }
                             .onAppear {
                                 print("❌ Échec du chargement de l'avatar")
-                                print("URL tentée: \(bar.avatarURL.absoluteString)")
+                                print("URL tentée: \(vm.avatarURL(for: bar).absoluteString)")
                                 print("Avatar ID: \(bar.avatar_id)")
                                 print("Erreur: \(error)")
                             }
@@ -61,7 +61,7 @@ struct MenuView: View {
                     .onAppear {
                         print("🎭 Tentative de chargement de l'avatar")
                         print("Avatar ID du barbare: \(bar.avatar_id)")
-                        print("URL construite: \(bar.avatarURL.absoluteString)")
+                        print("URL tentée: \(vm.avatarURL(for: bar).absoluteString)")
                     }
 
                     // Nom et exp

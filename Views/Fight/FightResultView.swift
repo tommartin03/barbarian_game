@@ -32,7 +32,7 @@ struct FightResultView: View {
                 // Mon barbare
                 VStack(spacing: 10) {
                     if let myBar = vm.barbarian {
-                        AsyncImage(url: myBar.avatarURL) { image in
+                        AsyncImage(url: vm.avatarURL(for: myBar)) { image in
                             image
                                 .resizable()
                                 .scaledToFill()
@@ -62,7 +62,7 @@ struct FightResultView: View {
                 
                 // Adversaire
                 VStack(spacing: 10) {
-                    AsyncImage(url: fightResponse.opponent.avatarURL) { image in
+                    AsyncImage(url: vm.avatarURL(for: fightResponse.opponent)) { image in
                         image
                             .resizable()
                             .scaledToFill()

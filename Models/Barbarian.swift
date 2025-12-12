@@ -20,8 +20,4 @@ struct Barbarian: Codable {
     let hp_max: Int
     let created_at: String
     let last_fight_at: String?
-    
-    var avatarURL: URL {
-        URL(string: "https://vps.vautard.fr/barbarians/avatars/a\(avatar_id).png")!
-    }
 }
