@@ -36,3 +36,21 @@ struct FightRound: Codable, Identifiable {
         "\(round)-\(actor)-\(target)"
     }
 }
+
+struct FightHistoryEntry: Codable, Identifiable, Equatable { 
+    let id: Int
+    let attacker_id: Int
+    let defender_id: Int
+    let winner_id: Int
+    let created_at: String
+    let exp_attacker: Int
+    let exp_defender: Int
+    let log: FightLog
+    
+    static func == (lhs: FightHistoryEntry, rhs: FightHistoryEntry) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+
+

@@ -27,6 +27,8 @@
 		3BE8383A2EEAD24F003A9D6C /* FightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838392EEAD249003A9D6C /* FightRepository.swift */; };
 		3BE838402EEADAC7003A9D6C /* FightResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8383F2EEADAC6003A9D6C /* FightResultView.swift */; };
 		3BE838422EEAF2F7003A9D6C /* FightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838412EEAF2EE003A9D6C /* FightDetailView.swift */; };
+		3BE8384D2EEC20A1003A9D6C /* FightHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8384C2EEC209F003A9D6C /* FightHistoryView.swift */; };
+		3BE8384F2EEC236C003A9D6C /* FightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8384E2EEC2368003A9D6C /* FightViewModel.swift */; };
 		3BF8BAED2EE07CAC006DB9E2 /* BarbarianRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */; };
 		3BF8BAEF2EE0805F006DB9E2 /* BarbarianViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */; };
 		3BF8BAF12EE0809F006DB9E2 /* CreateBarbarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */; };
@@ -58,6 +60,8 @@
 		3BE838392EEAD249003A9D6C /* FightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightRepository.swift; sourceTree = "<group>"; };
 		3BE8383F2EEADAC6003A9D6C /* FightResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightResultView.swift; sourceTree = "<group>"; };
 		3BE838412EEAF2EE003A9D6C /* FightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightDetailView.swift; sourceTree = "<group>"; };
+		3BE8384C2EEC209F003A9D6C /* FightHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightHistoryView.swift; sourceTree = "<group>"; };
+		3BE8384E2EEC2368003A9D6C /* FightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightViewModel.swift; sourceTree = "<group>"; };
 		3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianRepository.swift; sourceTree = "<group>"; };
 		3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianViewModel.swift; sourceTree = "<group>"; };
 		3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBarbarianView.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 		3BE838022EDF169D003A9D6C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8384E2EEC2368003A9D6C /* FightViewModel.swift */,
 				3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */,
 				3BE838092EDF183B003A9D6C /* AuthViewModel.swift */,
 			);
@@ -210,6 +215,7 @@
 		3BE8383C2EEAD8DF003A9D6C /* Fight */ = {
 			isa = PBXGroup;
 			children = (
+				3BE8384C2EEC209F003A9D6C /* FightHistoryView.swift */,
 				3BE838412EEAF2EE003A9D6C /* FightDetailView.swift */,
 				3BE8383F2EEADAC6003A9D6C /* FightResultView.swift */,
 			);
@@ -289,9 +295,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE8382A2EDF1D49003A9D6C /* AuthViewModel.swift in Sources */,
+				3BE8384D2EEC20A1003A9D6C /* FightHistoryView.swift in Sources */,
 				3BF8BAFB2EE0B15D006DB9E2 /* Barbarian.swift in Sources */,
 				3BE8383A2EEAD24F003A9D6C /* FightRepository.swift in Sources */,
 				3BF8BAEF2EE0805F006DB9E2 /* BarbarianViewModel.swift in Sources */,
+				3BE8384F2EEC236C003A9D6C /* FightViewModel.swift in Sources */,
 				3BE838122EDF1A0A003A9D6C /* LoginView.swift in Sources */,
 				3BE838142EDF1A19003A9D6C /* RegisterView.swift in Sources */,
 				3BE838252EDF1D29003A9D6C /* TokenManager.swift in Sources */,

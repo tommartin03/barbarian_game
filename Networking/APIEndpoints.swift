@@ -16,6 +16,7 @@ enum APIEndpoints {
     case spend_skill_points
     case logout
     case fight
+    case get_fight_history
 
     var url: URL {
         switch self {
@@ -35,6 +36,8 @@ enum APIEndpoints {
             return URL(string: "https://vps.vautard.fr/barbarians/ws/spend_skill_points.php")!
         case .fight:
             return URL(string: "https://vps.vautard.fr/barbarians/ws/fight.php")!
+        case .get_fight_history:
+            return URL(string: "https://vps.vautard.fr/barbarians/ws/my_fights.php")!
         }
     }
 
@@ -42,7 +45,7 @@ enum APIEndpoints {
         switch self {
         case .register, .login, .logout, .create_or_reset_barbarian, .spend_skill_points:
             return "POST"
-        case .get_my_barbarian, .get_avatars, .fight:
+        case .get_my_barbarian, .get_avatars, .fight, .get_fight_history:
             return "GET"
         }
     }

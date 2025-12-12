@@ -14,6 +14,7 @@ struct MenuView: View {
     @State private var alertMessage = ""
     @State private var fightResponse: FightResponse? = nil
     @State private var showFightResult = false
+    @State private var showHistory = false
 
     var body: some View {
         NavigationStack {
@@ -136,7 +137,9 @@ struct MenuView: View {
                     .buttonStyle(.bordered)
                     .frame(maxWidth: .infinity)
                     
-                    Button("Historique") { /* Navigation vers historique */ }
+                    Button("Historique") {
+                        showHistory = true
+                    }
                         .buttonStyle(.bordered)
                         .frame(maxWidth: .infinity)
                     
@@ -167,6 +170,10 @@ struct MenuView: View {
                     FightDetailView(fightResponse: response)
                         .environmentObject(vm)
                 }
+            }
+            .navigationDestination(isPresented: $showHistory) {
+                FightHistoryView()
+                    .environmentObject(vm)
             }
         }
     }
