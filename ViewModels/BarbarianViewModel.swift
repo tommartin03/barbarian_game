@@ -42,8 +42,8 @@ class BarbarianViewModel: ObservableObject {
         }
     }
 
-    func avatarURL(for bar: Barbarian) -> URL {
-        if let avatar = avatars.first(where: { $0.id == bar.avatar_id }) {
+    func avatarURL(avatarID: Int) -> URL {
+        if let avatar = avatars.first(where: { $0.id == avatarID }) {
             return avatar.fullURL
         }
         return URL(string: "https://vps.vautard.fr/barbarians/avatars/default.png")!

@@ -25,7 +25,7 @@ struct FightDetailView: View {
             HStack(spacing: 40) {
                 VStack {
                     if let myBar = vm.barbarian {
-                        AsyncImage(url: vm.avatarURL(for: myBar)) { image in
+                        AsyncImage(url: vm.avatarURL(avatarID: myBar.avatar_id)) { image in
                             image.resizable().scaledToFill()
                         } placeholder: {
                             ProgressView()
@@ -42,7 +42,7 @@ struct FightDetailView: View {
                     .font(.title3)
                 
                 VStack {
-                    AsyncImage(url: vm.avatarURL(for: fightResponse.opponent)) { image in
+                    AsyncImage(url: vm.avatarURL(avatarID: fightResponse.opponent.avatar_id)) { image in
                         image.resizable().scaledToFill()
                     } placeholder: {
                         ProgressView()

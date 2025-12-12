@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct Barbarian: Codable {
+struct Barbarian: Codable, Identifiable {
     let id: Int
     let name: String
     let avatar_id: Int

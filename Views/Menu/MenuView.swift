@@ -15,13 +15,14 @@ struct MenuView: View {
     @State private var fightResponse: FightResponse? = nil
     @State private var showFightResult = false
     @State private var showHistory = false
+    @State private var showLeaderBoard = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 if let bar = vm.barbarian {
                     // Avatar
-                    AsyncImage(url: vm.avatarURL(for: bar)) { phase in
+                    AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
                         switch phase {
                         case .success(let image):
                             image
@@ -102,6 +103,12 @@ struct MenuView: View {
                     .buttonStyle(.bordered)
                     .frame(maxWidth: .infinity)
                     
+                    Button("Leaderboard") {
+                            showLeaderBoard = true
+                        }
+                        .buttonStyle(.bordered)
+                        .frame(maxWidth: .infinity)
+                    
                     Button("Déconnexion") {
                         Task {
                             await authVm.logout()
@@ -128,6 +135,10 @@ struct MenuView: View {
                     FightDetailView(fightResponse: response)
                         .environmentObject(vm)
                 }
+            }
+            .navigationDestination(isPresented: $showLeaderBoard) {
+                LeaderboardView()
+                    .environmentObject(vm)
             }
             .navigationDestination(isPresented: $showHistory) {
                 FightHistoryView()
