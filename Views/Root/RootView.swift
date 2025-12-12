@@ -10,35 +10,44 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var authVm: AuthViewModel
     @EnvironmentObject var barbarianVm: BarbarianViewModel
+    
     @State private var isLoading = false
 
     var body: some View {
         Group {
             if authVm.isAuthenticated {
+                
                 if isLoading {
                     ProgressView("Chargement...")
-                        .task {
-                            await loadData()
-                        }
-                } else if let _ = barbarianVm.barbarian {
+                }
+                else if let _ = barbarianVm.barbarian {
                     MenuView()
-                } else {
+                }
+                else {
                     CreateBarbarianView()
                 }
+                
             } else {
                 LoginView()
             }
         }
+        .task(id: authVm.isAuthenticated) {
+            /// 🔥 On recharge UNIQUEMENT quand isAuthenticated change
+            if authVm.isAuthenticated {
+                await loadPlayerData()
+            } else {
+                barbarianVm.barbarian = nil
+            }
+        }
     }
-
-    func loadData() async {
+    
+    /// Fonction sécurisée
+    private func loadPlayerData() async {
         isLoading = true
-        // Charge avatars et barbare
-        async let _ = barbarianVm.loadAvatars()
-        async let bar = barbarianVm.loadBarbarian() // si pas de barbare, renvoie nil
-
-        _ = try? await bar
+        
+        await barbarianVm.loadAvatars()
+        await barbarianVm.loadBarbarian()
+        
         isLoading = false
     }
 }
-
