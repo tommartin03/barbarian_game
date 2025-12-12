@@ -18,98 +18,24 @@ struct FightResultView: View {
     }
     
     var body: some View {
-        VStack(spacing: 30) {
-            Spacer()
-            
-            // Résultat
-            Text(isVictory ? "VICTOIRE" : "DÉFAITE")
+        VStack(spacing: 20) {
+            Text(isVictory ? "VICTOIRE !" : "DÉFAITE")
                 .font(.largeTitle)
-                .bold()
                 .foregroundColor(isVictory ? .green : .red)
             
-            // Les deux barbares côte à côte
-            HStack(spacing: 40) {
-                // Mon barbare
-                VStack(spacing: 10) {
-                    if let myBar = vm.barbarian {
-                        AsyncImage(url: vm.avatarURL(for: myBar)) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(isVictory ? Color.green : Color.red, lineWidth: 3)
-                        )
-                        
-                        Text(myBar.name)
-                            .font(.headline)
-                        
-                        if isVictory {
-                            Image(systemName: "crown.fill")
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                }
-                
-                Text("VS")
-                    .font(.title)
-                    .foregroundColor(.gray)
-                
-                // Adversaire
-                VStack(spacing: 10) {
-                    AsyncImage(url: vm.avatarURL(for: fightResponse.opponent)) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle()
-                            .stroke(!isVictory ? Color.green : Color.red, lineWidth: 3)
-                    )
-                    
-                    Text(fightResponse.opponent.name)
-                        .font(.headline)
-                    
-                    if !isVictory {
-                        Image(systemName: "crown.fill")
-                            .foregroundColor(.yellow)
-                    }
-                }
-            }
+            Text("Adversaire : \(fightResponse.opponent.name)")
+                .font(.title2)
             
-            // EXP gagnée
-            if isVictory {
-                VStack(spacing: 5) {
-                    Text("Expérience")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    
-                    Text("+\(fightResponse.exp_gain) EXP")
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(.orange)
-                }
-            }
+            Text("EXP gagnée : +\(fightResponse.exp_gain)")
+                .font(.title3)
             
-            Spacer()
-            
-            // Bouton retour
-            Button("Retour au menu") {
+            Button("Retour") {
                 dismiss()
             }
             .buttonStyle(.borderedProminent)
-            .padding(.horizontal, 30)
-            .padding(.bottom, 40)
+            .padding(.top, 20)
         }
+        .padding()
         .navigationBarBackButtonHidden(true)
     }
 }

@@ -20,73 +20,40 @@ struct MenuView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 if let bar = vm.barbarian {
-                    // Avatar avec debug
+                    // Avatar
                     AsyncImage(url: vm.avatarURL(for: bar)) { phase in
                         switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(width: 180, height: 180)
                         case .success(let image):
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 180, height: 180)
+                                .frame(width: 120, height: 120)
                                 .clipShape(Circle())
-                                .shadow(radius: 10)
-                        case .failure(let error):
-                            VStack {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 180, height: 180)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                Text("Erreur: avatar_id = \(bar.avatar_id)")
-                                    .font(.caption)
-                                    .foregroundColor(.red)
-                                Text("URL: \(vm.avatarURL(for: bar).absoluteString)")
-                                    .font(.caption2)
-                                    .foregroundColor(.gray)
-                            }
-                            .onAppear {
-                                print("❌ Échec du chargement de l'avatar")
-                                print("URL tentée: \(vm.avatarURL(for: bar).absoluteString)")
-                                print("Avatar ID: \(bar.avatar_id)")
-                                print("Erreur: \(error)")
-                            }
-                        @unknown default:
-                            EmptyView()
+                        default:
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                                .foregroundColor(.gray)
                         }
-                    }
-                    .onAppear {
-                        print("🎭 Tentative de chargement de l'avatar")
-                        print("Avatar ID du barbare: \(bar.avatar_id)")
-                        print("URL tentée: \(vm.avatarURL(for: bar).absoluteString)")
                     }
 
                     // Nom et exp
-                    VStack(spacing: 5) {
-                        Text(bar.name)
-                            .font(.largeTitle)
-                            .bold()
-                        Text("Exp: \(bar.exp)")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        // Debug info
-                        Text("Avatar ID: \(bar.avatar_id)")
-                            .font(.caption2)
-                            .foregroundColor(.blue)
-                    }
+                    Text(bar.name)
+                        .font(.title)
+                        .bold()
+                    
+                    Text("Exp: \(bar.exp)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
 
                     // Points de compétence disponibles
                     if bar.skill_points > 0 {
-                        Text("Points de compétence disponibles: \(bar.skill_points)")
+                        Text("Points disponibles: \(bar.skill_points)")
                             .font(.headline)
                             .foregroundColor(.green)
-                            .padding(.vertical, 5)
                     }
 
-                    // Stats principales avec boutons + interactifs
+                    // Stats
                     VStack(spacing: 10) {
                         StatRowView(statName: "Attaque", value: bar.attack, canAdd: bar.skill_points > 0) {
                             vm.addPoint(to: "attack")
@@ -100,19 +67,14 @@ struct MenuView: View {
                         StatRowView(statName: "Esquive", value: bar.evasion, canAdd: bar.skill_points > 0) {
                             vm.addPoint(to: "evasion")
                         }
-
-                        // Autres stats non modifiables
                         StatRowView(statName: "PV max", value: bar.hp_max, canAdd: false, addAction: {})
-                        StatRowView(statName: "LOVE", value: bar.love, canAdd: false, addAction: {})
                     }
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 15).fill(Color.gray.opacity(0.1)))
-                    .padding(.horizontal)
                 }
 
                 Spacer()
 
-                // Boutons plus petits et simples
+                // Boutons
                 HStack(spacing: 15) {
                     Button("Combat") {
                         Task {
@@ -120,28 +82,25 @@ struct MenuView: View {
                                 let repo = FightRepository()
                                 let response = try await repo.startFight()
                                 
-                                // Stocker la réponse et afficher la vue de déroulé
                                 fightResponse = response
                                 showFightResult = true
                                 
-                                // Recharger le barbare après
                                 await vm.loadBarbarian()
 
                             } catch {
-                                print("❌ Erreur: \(error)")
-                                alertMessage = "Erreur lors du combat: \(error.localizedDescription)"
+                                alertMessage = "Erreur lors du combat"
                                 showAlert = true
                             }
                         }
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity)
                     
                     Button("Historique") {
                         showHistory = true
                     }
-                        .buttonStyle(.bordered)
-                        .frame(maxWidth: .infinity)
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity)
                     
                     Button("Déconnexion") {
                         Task {
@@ -152,15 +111,14 @@ struct MenuView: View {
                     .tint(.red)
                     .frame(maxWidth: .infinity)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 20)
+                .padding()
             }
             .padding(.top, 20)
             .task {
-                await vm.loadAvatars() // charger la liste des avatars
-                await vm.loadBarbarian() // charger le barbare
+                await vm.loadAvatars()
+                await vm.loadBarbarian()
             }
-            .alert("Combat", isPresented: $showAlert) {
+            .alert("Erreur", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
                 Text(alertMessage)
@@ -189,25 +147,18 @@ struct StatRowView: View {
     var body: some View {
         HStack {
             Text(statName)
-                .font(.headline)
             Spacer()
             Text("\(value)")
-                .font(.title3)
                 .bold()
             if canAdd {
                 Button(action: addAction) {
                     Image(systemName: "plus.circle.fill")
                         .foregroundColor(.blue)
-                        .font(.title2)
                 }
             }
         }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white)
-                .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 2)
-        )
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(8)
     }
 }
