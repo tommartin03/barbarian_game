@@ -14,12 +14,10 @@ struct MenuView: View {
     @State private var alertMessage = ""
     @State private var fightResponse: FightResponse? = nil
     @State private var showFightResult = false
-    @State private var showHistory = false
-    @State private var showLeaderBoard = false
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
+            VStack(spacing: 10) {
                 if let bar = vm.barbarian {
                     // Avatar
                     AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
@@ -28,34 +26,36 @@ struct MenuView: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 120, height: 120)
+                                .frame(width: 100, height: 100)
                                 .clipShape(Circle())
                         default:
                             Image(systemName: "person.circle.fill")
                                 .resizable()
-                                .frame(width: 120, height: 120)
+                                .frame(width: 100, height: 100)
                                 .foregroundColor(.gray)
                         }
                     }
 
                     // Nom et exp
-                    Text(bar.name)
-                        .font(.title)
-                        .bold()
-                    
-                    Text("Exp: \(bar.exp)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                    VStack(spacing: 2) {
+                        Text(bar.name)
+                            .font(.title2)
+                            .bold()
+                        
+                        Text("Exp: \(bar.exp)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
 
                     // Points de compétence disponibles
                     if bar.skill_points > 0 {
                         Text("Points disponibles: \(bar.skill_points)")
-                            .font(.headline)
+                            .font(.subheadline)
                             .foregroundColor(.green)
                     }
 
                     // Stats
-                    VStack(spacing: 10) {
+                    VStack(spacing: 8) {
                         StatRowView(statName: "Attaque", value: bar.attack, canAdd: bar.skill_points > 0) {
                             vm.addPoint(to: "attack")
                         }
@@ -74,10 +74,11 @@ struct MenuView: View {
                 }
 
                 Spacer()
+                    .frame(height: 10)
 
-                // Boutons
-                HStack(spacing: 15) {
-                    Button("Combat") {
+                // Boutons en vertical
+                VStack(spacing: 10) {
+                    Button {
                         Task {
                             do {
                                 let repo = FightRepository()
@@ -93,34 +94,44 @@ struct MenuView: View {
                                 showAlert = true
                             }
                         }
+                    } label: {
+                        Text("Combat")
+                            .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
-                    .frame(maxWidth: .infinity)
                     
-                    Button("Historique") {
-                        showHistory = true
+                    NavigationLink {
+                        FightHistoryView()
+                            .environmentObject(vm)
+                    } label: {
+                        Text("Historique")
+                            .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
-                    .frame(maxWidth: .infinity)
                     
-                    Button("Leaderboard") {
-                            showLeaderBoard = true
-                        }
-                        .buttonStyle(.bordered)
-                        .frame(maxWidth: .infinity)
+                    NavigationLink {
+                        LeaderboardView()
+                            .environmentObject(vm)
+                    } label: {
+                        Text("Classement")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
                     
-                    Button("Déconnexion") {
+                    Button {
                         Task {
                             await authVm.logout()
                         }
+                    } label: {
+                        Text("Déconnexion")
+                            .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
                     .tint(.red)
-                    .frame(maxWidth: .infinity)
                 }
                 .padding()
             }
-            .padding(.top, 20)
+            .padding(.top, 10)
             .task {
                 await vm.loadAvatars()
                 await vm.loadBarbarian()
@@ -135,14 +146,6 @@ struct MenuView: View {
                     FightDetailView(fightResponse: response)
                         .environmentObject(vm)
                 }
-            }
-            .navigationDestination(isPresented: $showLeaderBoard) {
-                LeaderboardView()
-                    .environmentObject(vm)
-            }
-            .navigationDestination(isPresented: $showHistory) {
-                FightHistoryView()
-                    .environmentObject(vm)
             }
         }
     }

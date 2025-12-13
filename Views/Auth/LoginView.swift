@@ -12,32 +12,58 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                TextField("Username", text: $authVm.username)
-                    .textFieldStyle(.roundedBorder)
-                    .autocapitalization(.none)
-                    .autocorrectionDisabled(true)
+            VStack(spacing: 0) {
+                Spacer()
+                
+                // Titre
+                Text("Barbarian Game")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.bottom, 50)
+                
+                // Formulaire
+                VStack(spacing: 15) {
+                    TextField("Username", text: $authVm.username)
+                        .textFieldStyle(.roundedBorder)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled(true)
 
-                SecureField("Password", text: $authVm.password)
-                    .textFieldStyle(.roundedBorder)
+                    SecureField("Password", text: $authVm.password)
+                        .textFieldStyle(.roundedBorder)
 
-                if !authVm.errorMessage.isEmpty {
-                    Text(authVm.errorMessage)
-                        .foregroundColor(.red)
-                        .multilineTextAlignment(.center)
+                    if !authVm.errorMessage.isEmpty {
+                        Text(authVm.errorMessage)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                            .multilineTextAlignment(.center)
+                    }
                 }
+                .padding(.horizontal, 30)
+                
+                // Boutons
+                VStack(spacing: 12) {
+                    Button {
+                        Task { await authVm.login() }
+                    } label: {
+                        Text("Connexion")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
 
-                Button("Login") {
-                    Task { await authVm.login() }
+                    NavigationLink {
+                        RegisterView()
+                    } label: {
+                        Text("Créer un compte")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.borderedProminent) // bouton actif
-
-                NavigationLink("Register") {
-                    RegisterView()
-                }
-                .buttonStyle(.bordered)
+                .padding(.horizontal, 30)
+                .padding(.top, 30)
+                
+                Spacer()
+                Spacer()
             }
-            .padding()
         }
     }
 }
