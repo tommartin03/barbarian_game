@@ -4,16 +4,16 @@
 //
 //  Created by tplocal on 03/12/2025.
 //
+
 import SwiftUI
 
 struct MenuView: View {
     @EnvironmentObject var vm: BarbarianViewModel
     @EnvironmentObject var authVm: AuthViewModel
+    @EnvironmentObject var fightVm: FightViewModel
     
     @State private var showAlert = false
-    @State private var alertMessage = ""
-    @State private var fightResponse: FightResponse? = nil
-    @State private var showFightResult = false
+    @State private var navigateToFight = false
 
     var body: some View {
         NavigationStack {
@@ -80,25 +80,30 @@ struct MenuView: View {
                 VStack(spacing: 10) {
                     Button {
                         Task {
-                            do {
-                                let repo = FightRepository()
-                                let response = try await repo.startFight()
-                                
-                                fightResponse = response
-                                showFightResult = true
-                                
+                            let success = await fightVm.startFight()
+                            if success {
+                                navigateToFight = true
                                 await vm.loadBarbarian()
-
-                            } catch {
-                                alertMessage = "Erreur lors du combat"
+                            } else {
                                 showAlert = true
                             }
                         }
                     } label: {
-                        Text("Combat")
+                        if fightVm.isLoading {
+                            HStack {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                Text("Recherche d'adversaire...")
+                                    .font(.subheadline)
+                            }
                             .frame(maxWidth: .infinity)
+                        } else {
+                            Text("Combat")
+                                .frame(maxWidth: .infinity)
+                        }
                     }
                     .buttonStyle(.borderedProminent)
+                    .disabled(fightVm.isLoading)
                     
                     NavigationLink {
                         FightHistoryView()
@@ -139,12 +144,15 @@ struct MenuView: View {
             .alert("Erreur", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text(alertMessage)
+                Text(fightVm.errorMessage)
             }
-            .navigationDestination(isPresented: $showFightResult) {
-                if let response = fightResponse {
-                    FightDetailView(fightResponse: response)
+            .navigationDestination(isPresented: $navigateToFight) {
+                if let fight = fightVm.currentFight {
+                    FightDetailView(fightResponse: fight)
                         .environmentObject(vm)
+                        .onDisappear {
+                            fightVm.resetFight()
+                        }
                 }
             }
         }

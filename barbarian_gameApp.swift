@@ -11,12 +11,14 @@ import SwiftUI
 struct barbarian_gameApp: App {
     @StateObject var authVm = AuthViewModel()
     @StateObject var barbarianVm = BarbarianViewModel()
+    @StateObject var fightVm = FightViewModel()
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(authVm)
                 .environmentObject(barbarianVm)
+                .environmentObject(fightVm)
         }
     }
 }

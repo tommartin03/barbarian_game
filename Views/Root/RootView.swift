@@ -16,7 +16,6 @@ struct RootView: View {
     var body: some View {
         Group {
             if authVm.isAuthenticated {
-                
                 if isLoading {
                     ProgressView("Chargement...")
                 }

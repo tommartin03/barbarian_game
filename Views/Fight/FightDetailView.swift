@@ -10,6 +10,8 @@ import SwiftUI
 struct FightDetailView: View {
     let fightResponse: FightResponse
     @EnvironmentObject var vm: BarbarianViewModel
+    @State private var showResults = false
+    @Environment(\.dismiss) private var dismiss
     
     var myBarbarianId: Int {
         vm.barbarian?.id ?? 0
@@ -46,7 +48,9 @@ struct FightDetailView: View {
             }
             
             // Bouton résultats
-            NavigationLink(destination: FightResultView(fightResponse: fightResponse)) {
+            Button(action: {
+                showResults = true
+            }) {
                 Text("Voir les résultats")
                     .frame(maxWidth: .infinity)
             }
@@ -55,6 +59,12 @@ struct FightDetailView: View {
         }
         .navigationTitle("⚔️ Combat")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showResults) {
+            FightResultView(fightResponse: fightResponse, onDismissAll: {
+                dismiss()
+            })
+            .environmentObject(vm)
+        }
     }
 }
 

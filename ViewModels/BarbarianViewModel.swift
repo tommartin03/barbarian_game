@@ -59,16 +59,7 @@ class BarbarianViewModel: ObservableObject {
         }
     }
 
-    // Déconnexion
-    func logout() {
-        barbarian = nil
-        // Supprimer token stocké si besoin
-    }
-    func addDebugPoints() {
-        barbarian?.skill_points += 10
-    }
-
-    // MARK: - Ajouter un point de compétence
+    //  Ajouter un point de compétence
     func addPoint(to stat: String) {
         guard let bar = barbarian, bar.skill_points > 0 else { return }
         isUpdating = true

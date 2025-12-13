@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3BB1939E2EED73F700844797 /* FightHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1939D2EED73F700844797 /* FightHistoryViewModel.swift */; };
+		3BB193A02EED819A00844797 /* FightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB1939F2EED819400844797 /* FightViewModel.swift */; };
 		3BE837FD2EDF1625003A9D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BE837FA2EDF1625003A9D6C /* Assets.xcassets */; };
 		3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE837FC2EDF1625003A9D6C /* ContentView.swift */; };
 		3BE837FF2EDF1625003A9D6C /* barbarian_gameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		3BB1939D2EED73F700844797 /* FightHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightHistoryViewModel.swift; sourceTree = "<group>"; };
+		3BB1939F2EED819400844797 /* FightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightViewModel.swift; sourceTree = "<group>"; };
 		3BE837DD2EDF13C4003A9D6C /* barbarian_game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = barbarian_game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE837FA2EDF1625003A9D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BE837FB2EDF1625003A9D6C /* barbarian_gameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barbarian_gameApp.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		3BE838022EDF169D003A9D6C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3BB1939F2EED819400844797 /* FightViewModel.swift */,
 				3BB1939D2EED73F700844797 /* FightHistoryViewModel.swift */,
 				3BF8BAFE2EEC6873006DB9E2 /* LeaderboardViewModel.swift */,
 				3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */,
@@ -329,6 +332,7 @@
 				3BF8BB042EEC6E00006DB9E2 /* LeaderboardBarbarian.swift in Sources */,
 				3BE838292EDF1D43003A9D6C /* APIEndpoints.swift in Sources */,
 				3BF8BAED2EE07CAC006DB9E2 /* BarbarianRepository.swift in Sources */,
+				3BB193A02EED819A00844797 /* FightViewModel.swift in Sources */,
 				3BE838402EEADAC7003A9D6C /* FightResultView.swift in Sources */,
 				3BE838282EDF1D3E003A9D6C /* APIClient.swift in Sources */,
 				3BE838382EEAD23C003A9D6C /* Fight.swift in Sources */,
