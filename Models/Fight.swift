@@ -5,7 +5,6 @@
 //  Created by tplocal on 11/12/2025.
 //
 
-
 import Foundation
 
 // Réponse complète d'un combat
@@ -37,7 +36,7 @@ struct FightRound: Codable, Identifiable {
     }
 }
 
-struct FightHistoryEntry: Codable, Identifiable, Equatable { 
+struct FightHistoryEntry: Codable, Identifiable, Equatable {
     let id: Int
     let attacker_id: Int
     let defender_id: Int
@@ -47,10 +46,17 @@ struct FightHistoryEntry: Codable, Identifiable, Equatable {
     let exp_defender: Int
     let log: FightLog
     
+    // Propriétés non-Codable pour stocker les noms
+    var attackerName: String?
+    var defenderName: String?
+    var attackerAvatarId: Int?  
+    var defenderAvatarId: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, attacker_id, defender_id, winner_id, created_at, exp_attacker, exp_defender, log
+    }
+    
     static func == (lhs: FightHistoryEntry, rhs: FightHistoryEntry) -> Bool {
         lhs.id == rhs.id
     }
 }
-
-
-

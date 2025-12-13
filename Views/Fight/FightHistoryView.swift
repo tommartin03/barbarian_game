@@ -16,63 +16,117 @@ struct FightHistoryView: View {
     }
     
     var body: some View {
-        VStack {
-            if vm.history.isEmpty {
-                Text("Aucun combat pour le moment")
-                    .foregroundColor(.gray)
-                    .padding()
-            } else {
-                List(vm.history) { entry in
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Text("Combat #\(entry.id)")
-                                .font(.headline)
-                            Spacer()
-                            Text(entry.created_at)
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                        
-                        // Rôle dans le combat
-                        if entry.attacker_id == myId {
-                            Text("Vous avez attaqué")
-                                .font(.subheadline)
-                                .foregroundColor(.blue)
-                        } else if entry.defender_id == myId {
-                            Text("Vous avez défendu")
-                                .font(.subheadline)
-                                .foregroundColor(.orange)
-                        }
-                        
-                        // Résultat
-                        HStack {
-                            if entry.winner_id == myId {
-                                Text("🏆 Victoire")
-                                    .foregroundColor(.green)
-                                    .bold()
-                            } else {
-                                Text("💀 Défaite")
-                                    .foregroundColor(.red)
-                                    .bold()
-                            }
-                            
-                            Spacer()
-                            
-                            // EXP gagnée par moi
-                            let myExp = entry.attacker_id == myId ? entry.exp_attacker : entry.exp_defender
-                            Text("+\(myExp) EXP")
-                                .foregroundColor(.orange)
-                                .bold()
-                        }
-                        .font(.subheadline)
+        ScrollView {
+            VStack(spacing: 16) {
+                if vm.isLoading {
+                    ProgressView("Chargement...")
+                        .padding()
+                } else if vm.history.isEmpty {
+                    Text("Aucun combat pour le moment")
+                        .foregroundColor(.gray)
+                        .padding(.top, 100)
+                } else {
+                    ForEach(vm.history) { entry in
+                        FightHistoryRow(entry: entry, myId: myId)
+                            .environmentObject(barbarianVm)
                     }
-                    .padding(.vertical, 5)
                 }
             }
+            .padding()
         }
-        .navigationTitle("Historique")
+        .navigationTitle("⚔️ Historique")
+        .navigationBarTitleDisplayMode(.inline)
         .task {
             await vm.loadHistory()
         }
+    }
+}
+
+struct FightHistoryRow: View {
+    let entry: FightHistoryEntry
+    let myId: Int
+    @EnvironmentObject var vm: BarbarianViewModel
+    
+    var isVictory: Bool {
+        entry.winner_id == myId
+    }
+    
+    var opponentAvatarId: Int {
+        if entry.attacker_id == myId {
+            return entry.defenderAvatarId ?? 1
+        } else {
+            return entry.attackerAvatarId ?? 1
+        }
+    }
+    
+    var description: String {
+        if entry.attacker_id == myId {
+            return "Vous avez attaqué \(entry.defenderName ?? "ID: \(entry.defender_id)")"
+        } else {
+            return "\(entry.attackerName ?? "ID: \(entry.attacker_id)") vous a attaqué"
+        }
+    }
+    
+    var myExp: Int {
+        entry.attacker_id == myId ? entry.exp_attacker : entry.exp_defender
+    }
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            // Avatar de l'adversaire
+            AsyncImage(url: vm.avatarURL(avatarID: opponentAvatarId)) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 70, height: 70)
+                        .clipShape(Circle())
+                default:
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(.gray)
+                }
+            }
+            
+            // Infos du combat
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Combat #\(entry.id)")
+                    .font(.headline)
+                
+                Text(description)
+                    .font(.subheadline)
+                    .foregroundColor(entry.attacker_id == myId ? .blue : .orange)
+                
+                HStack(spacing: 12) {
+                    Label(isVictory ? "Victoire" : "Défaite",
+                          systemImage: isVictory ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .foregroundColor(isVictory ? .green : .red)
+                    
+                    Label("+\(myExp) EXP", systemImage: "bolt.fill")
+                        .foregroundColor(.yellow)
+                }
+                .font(.subheadline)
+                
+                Text(formatDate(entry.created_at))
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            
+            Spacer()
+        }
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .cornerRadius(14)
+        .shadow(radius: 2)
+    }
+    
+    private func formatDate(_ dateString: String) -> String {
+        let components = dateString.split(separator: " ")
+        if components.count >= 2 {
+            return "\(components[0]) \(components[1].prefix(5))"
+        }
+        return dateString
     }
 }
