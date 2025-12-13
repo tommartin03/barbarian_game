@@ -32,7 +32,12 @@ class AuthViewModel: ObservableObject {
         } catch let apiError as APIError {
             switch apiError {
             case .serverError(let message):
-                errorMessage = message
+                if message == "invalid_credentials" {
+                    errorMessage = "Identifiants invalides."
+                }
+                else {
+                        errorMessage = message
+                    }
             default:
                 errorMessage = apiError.localizedDescription
             }
