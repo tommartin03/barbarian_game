@@ -23,7 +23,6 @@
 		3BE8382B2EDF1D56003A9D6C /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8380E2EDF197C003A9D6C /* AuthResponse.swift */; };
 		3BE8382C2EDF1D5B003A9D6C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838082EDF182D003A9D6C /* User.swift */; };
 		3BE8382E2EE03F63003A9D6C /* ServerErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */; };
-		3BE838332EE04309003A9D6C /* BarbarianManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */; };
 		3BE838362EEACB4D003A9D6C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838352EEACB47003A9D6C /* RootView.swift */; };
 		3BE838382EEAD23C003A9D6C /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838372EEAD238003A9D6C /* Fight.swift */; };
 		3BE8383A2EEAD24F003A9D6C /* FightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE838392EEAD249003A9D6C /* FightRepository.swift */; };
@@ -33,7 +32,6 @@
 		3BF8BAED2EE07CAC006DB9E2 /* BarbarianRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */; };
 		3BF8BAEF2EE0805F006DB9E2 /* BarbarianViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */; };
 		3BF8BAF12EE0809F006DB9E2 /* CreateBarbarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */; };
-		3BF8BAF32EE080C3006DB9E2 /* BarbarianDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF22EE080C2006DB9E2 /* BarbarianDetailView.swift */; };
 		3BF8BAF72EE0880A006DB9E2 /* AvatarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */; };
 		3BF8BAF92EE09B02006DB9E2 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */; };
 		3BF8BAFB2EE0B15D006DB9E2 /* Barbarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */; };
@@ -61,7 +59,6 @@
 		3BE838112EDF1A09003A9D6C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3BE838132EDF1A12003A9D6C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		3BE8382D2EE03F5D003A9D6C /* ServerErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorResponse.swift; sourceTree = "<group>"; };
-		3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianManagementView.swift; sourceTree = "<group>"; };
 		3BE838352EEACB47003A9D6C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		3BE838372EEAD238003A9D6C /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
 		3BE838392EEAD249003A9D6C /* FightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightRepository.swift; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 		3BF8BAEC2EE07CA9006DB9E2 /* BarbarianRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianRepository.swift; sourceTree = "<group>"; };
 		3BF8BAEE2EE0805D006DB9E2 /* BarbarianViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianViewModel.swift; sourceTree = "<group>"; };
 		3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBarbarianView.swift; sourceTree = "<group>"; };
-		3BF8BAF22EE080C2006DB9E2 /* BarbarianDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarbarianDetailView.swift; sourceTree = "<group>"; };
 		3BF8BAF62EE08808006DB9E2 /* AvatarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRepository.swift; sourceTree = "<group>"; };
 		3BF8BAF82EE09AFC006DB9E2 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		3BF8BAFA2EE0B158006DB9E2 /* Barbarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barbarian.swift; sourceTree = "<group>"; };
@@ -212,9 +208,7 @@
 		3BE8382F2EE042E7003A9D6C /* Barbarian */ = {
 			isa = PBXGroup;
 			children = (
-				3BF8BAF22EE080C2006DB9E2 /* BarbarianDetailView.swift */,
 				3BF8BAF02EE0809D006DB9E2 /* CreateBarbarianView.swift */,
-				3BE838322EE04307003A9D6C /* BarbarianManagementView.swift */,
 			);
 			path = Barbarian;
 			sourceTree = "<group>";
@@ -338,12 +332,10 @@
 				3BE838382EEAD23C003A9D6C /* Fight.swift in Sources */,
 				3BE838362EEACB4D003A9D6C /* RootView.swift in Sources */,
 				3BF8BAF72EE0880A006DB9E2 /* AvatarRepository.swift in Sources */,
-				3BE838332EE04309003A9D6C /* BarbarianManagementView.swift in Sources */,
 				3BE838262EDF1D34003A9D6C /* AuthRepository.swift in Sources */,
 				3BE837FE2EDF1625003A9D6C /* ContentView.swift in Sources */,
 				3BE8382C2EDF1D5B003A9D6C /* User.swift in Sources */,
 				3BF8BB022EEC68A7006DB9E2 /* LeaderboardView.swift in Sources */,
-				3BF8BAF32EE080C3006DB9E2 /* BarbarianDetailView.swift in Sources */,
 				3BF8BAF12EE0809F006DB9E2 /* CreateBarbarianView.swift in Sources */,
 				3BE8382B2EDF1D56003A9D6C /* AuthResponse.swift in Sources */,
 				3BE8382E2EE03F63003A9D6C /* ServerErrorResponse.swift in Sources */,

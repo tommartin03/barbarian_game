@@ -31,7 +31,6 @@ struct RootView: View {
             }
         }
         .task(id: authVm.isAuthenticated) {
-            /// 🔥 On recharge UNIQUEMENT quand isAuthenticated change
             if authVm.isAuthenticated {
                 await loadPlayerData()
             } else {
@@ -40,7 +39,6 @@ struct RootView: View {
         }
     }
     
-    /// Fonction sécurisée
     private func loadPlayerData() async {
         isLoading = true
         

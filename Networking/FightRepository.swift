@@ -12,6 +12,6 @@ class FightRepository {
         try await APIClient.shared.request(.fight)
     }
     func getFightHistory() async throws -> [FightHistoryEntry] {
-            try await APIClient.shared.request(.get_fight_history)
+        try await APIClient.shared.request(.get_fight_history)
     }
 }
