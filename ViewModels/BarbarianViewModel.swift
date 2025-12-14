@@ -54,6 +54,18 @@ class BarbarianViewModel: ObservableObject {
             print("Erreur création barbare :", error)
         }
     }
+    
+    func resetBarbarian() async {
+        guard let bar = barbarian else { return }
+        isUpdating = true
+
+        do {
+            try await barbarianRepo.resetBarbarian(name: bar.name)
+            self.barbarian = nil // plus de barbare localement
+        } catch {
+            print("Erreur lors de la suppression du barbare :", error)
+        }
+    }
 
     func addPoint(to stat: String) {
         guard let bar = barbarian, bar.skill_points > 0 else { return }

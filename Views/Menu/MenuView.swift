@@ -128,6 +128,18 @@ struct MenuView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    
+                    //supression du barbare
+                    Button {
+                        Task {
+                            await vm.resetBarbarian()
+                        }
+                    } label: {
+                        Text("Supprimer le barbare")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.red)
 
                     // Déconnexion
                     Button {

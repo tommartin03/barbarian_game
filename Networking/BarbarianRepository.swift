@@ -20,6 +20,16 @@ class BarbarianRepository {
             body: ["name": name, "avatar_id": avatarID]
         )
     }
+    
+    func resetBarbarian(name: String) async throws {
+            let body: [String: String] = ["name": name]
+            
+            let _: EmptyResponse = try await APIClient.shared.request(
+                .create_or_reset_barbarian,
+                body: body
+            )
+        }
+    
     func spendSkillPoints(
             attack: Int,
             defense: Int,
