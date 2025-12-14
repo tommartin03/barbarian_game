@@ -92,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				3BE838062EDF16B9003A9D6C /* Resources */,
-				3BE838052EDF16B1003A9D6C /* Utils */,
 				3BE838042EDF16AB003A9D6C /* Networking */,
 				3BE838032EDF16A5003A9D6C /* Services */,
 				3BE838022EDF169D003A9D6C /* ViewModels */,
@@ -170,13 +169,6 @@
 				3BE8380B2EDF1878003A9D6C /* APIEndpoints.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		3BE838052EDF16B1003A9D6C /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		3BE838062EDF16B9003A9D6C /* Resources */ = {

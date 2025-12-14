@@ -11,15 +11,17 @@ struct MenuView: View {
     @EnvironmentObject var vm: BarbarianViewModel
     @EnvironmentObject var authVm: AuthViewModel
     @EnvironmentObject var fightVm: FightViewModel
-    
+    @EnvironmentObject var fightHistoryVm: FightHistoryViewModel
+
     @State private var showAlert = false
+    @State private var alertMessage = ""
     @State private var navigateToFight = false
 
     var body: some View {
         NavigationStack {
+            //affichage du barbare
             VStack(spacing: 10) {
                 if let bar = vm.barbarian {
-                    // Avatar
                     AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
                         switch phase {
                         case .success(let image):
@@ -35,13 +37,11 @@ struct MenuView: View {
                                 .foregroundColor(.gray)
                         }
                     }
-
-                    // Nom et exp
                     VStack(spacing: 2) {
                         Text(bar.name)
                             .font(.title2)
                             .bold()
-                        
+
                         HStack(spacing: 10) {
                             Text("🔥 LOVE \(bar.love)")
                                 .font(.caption)
@@ -53,15 +53,13 @@ struct MenuView: View {
                                 .foregroundColor(.gray)
                         }
                     }
-
-                    // Points de compétence disponibles
+                    //gestion des compétences
                     if bar.skill_points > 0 {
                         Text("Points disponibles: \(bar.skill_points)")
                             .font(.subheadline)
                             .foregroundColor(.green)
                     }
 
-                    // Stats
                     VStack(spacing: 8) {
                         StatRowView(statName: "Attaque", value: bar.attack, canAdd: bar.skill_points > 0) {
                             vm.addPoint(to: "attack")
@@ -80,11 +78,11 @@ struct MenuView: View {
                     .padding()
                 }
 
-                Spacer()
-                    .frame(height: 10)
+                Spacer().frame(height: 10)
 
-                // Boutons en vertical
+                //gestion des boutons
                 VStack(spacing: 10) {
+                    // Combat
                     Button {
                         Task {
                             let success = await fightVm.startFight()
@@ -92,6 +90,7 @@ struct MenuView: View {
                                 navigateToFight = true
                                 await vm.loadBarbarian()
                             } else {
+                                alertMessage = fightVm.errorMessage
                                 showAlert = true
                             }
                         }
@@ -99,9 +98,7 @@ struct MenuView: View {
                         if fightVm.isLoading {
                             HStack {
                                 ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                Text("Recherche d'adversaire...")
-                                    .font(.subheadline)
+                                Text("Recherche...")
                             }
                             .frame(maxWidth: .infinity)
                         } else {
@@ -111,7 +108,8 @@ struct MenuView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(fightVm.isLoading)
-                    
+
+                    // Historique
                     NavigationLink {
                         FightHistoryView()
                             .environmentObject(vm)
@@ -120,7 +118,8 @@ struct MenuView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
-                    
+
+                    // Classement
                     NavigationLink {
                         LeaderboardView()
                             .environmentObject(vm)
@@ -129,7 +128,8 @@ struct MenuView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
-                    
+
+                    // Déconnexion
                     Button {
                         Task {
                             await authVm.logout()
@@ -147,12 +147,32 @@ struct MenuView: View {
             .task {
                 await vm.loadAvatars()
                 await vm.loadBarbarian()
+                await fightHistoryVm.loadHistory()
             }
-            .alert("Erreur", isPresented: $showAlert) {
-                Button("OK", role: .cancel) { }
+            
+            //démarage du pooling pour veirfier si il y a un nouveau combat dans l'historique
+            .onAppear {
+                fightHistoryVm.startMonitoring()
+            }
+            .onDisappear {
+                fightHistoryVm.stopMonitoring()
+            }
+            
+            //alerte nouveaux combat
+            .alert(
+                "Nouveau combat",
+                isPresented: Binding(
+                    get: { fightHistoryVm.newFightNotification != nil },
+                    set: { _ in fightHistoryVm.newFightNotification = nil }
+                )
+            ) {
+                Button("OK", role: .cancel) {
+                    fightHistoryVm.newFightNotification = nil
+                }
             } message: {
-                Text(fightVm.errorMessage)
+                Text("Un nouveau combat est disponible dans l'historique.")
             }
+            //gestion de la navigation pour les combats
             .navigationDestination(isPresented: $navigateToFight) {
                 if let fight = fightVm.currentFight {
                     FightDetailView(fightResponse: fight)

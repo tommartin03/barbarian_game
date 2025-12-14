@@ -36,7 +36,7 @@ struct FightRound: Codable, Identifiable {
     }
 }
 
-struct FightHistoryEntry: Codable, Identifiable, Equatable {
+struct FightHistoryEntry: Codable, Identifiable {
     let id: Int
     let attacker_id: Int
     let defender_id: Int
@@ -46,17 +46,15 @@ struct FightHistoryEntry: Codable, Identifiable, Equatable {
     let exp_defender: Int
     let log: FightLog
     
-    // Propriétés non-Codable pour stocker les noms
+    // propriétés qui ne vienne pas de l'api
     var attackerName: String?
     var defenderName: String?
     var attackerAvatarId: Int?  
     var defenderAvatarId: Int?
     
+    //eviter les bugs avec les propritétées qui ne viennent pas de l'api, elles ne seront pas décodé
     enum CodingKeys: String, CodingKey {
         case id, attacker_id, defender_id, winner_id, created_at, exp_attacker, exp_defender, log
     }
-    
-    static func == (lhs: FightHistoryEntry, rhs: FightHistoryEntry) -> Bool {
-        lhs.id == rhs.id
-    }
+
 }

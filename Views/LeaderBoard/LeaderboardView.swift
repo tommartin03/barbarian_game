@@ -24,12 +24,12 @@ struct LeaderboardView: View {
             .navigationTitle("🏆 Classement")
             .navigationBarTitleDisplayMode(.inline)
             .task {
-                // 🔥 Chargement immédiat quand on ouvre la vue
+                // Chargement immédiat quand on ouvre la vue
                 await lbVM.loadLeaderboard()
                 lbVM.startMonitoring()
             }
             .onDisappear {
-                // 🛑 Important : arrêter le timer
+                // arrêter le timer
                 lbVM.stopMonitoring()
             }
         }
@@ -42,7 +42,6 @@ struct LeaderboardRow: View {
     var body: some View {
         HStack(spacing: 16) {
 
-            // --- Avatar ---
             AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
                 switch phase {
                 case .success(let image):

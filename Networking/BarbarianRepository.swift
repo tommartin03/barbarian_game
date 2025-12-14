@@ -33,7 +33,7 @@ class BarbarianRepository {
                 "evasion": evasion
             ]
 
-            // 2️⃣ Spécifier le type générique pour que Swift sache quoi décoder
+            // Spécifier le type générique pour que Swift sache quoi décoder
             let _: EmptyResponse = try await APIClient.shared.request(
                 .spend_skill_points,
                 body: body

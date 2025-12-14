@@ -17,8 +17,6 @@ class BarbarianViewModel: ObservableObject {
     private let barbarianRepo = BarbarianRepository()
     private let avatarRepo = AvatarRepository()
 
-    // Charger le barbare existant
-    @MainActor
     func loadBarbarian() async {
         isLoading = true
         defer { isLoading = false }
@@ -31,8 +29,7 @@ class BarbarianViewModel: ObservableObject {
             self.barbarian = nil
         }
     }
-
-    // Charger la liste des avatars
+    
     func loadAvatars() async {
         do {
             let allAvatars = try await avatarRepo.getAvatars()
@@ -49,7 +46,6 @@ class BarbarianViewModel: ObservableObject {
         return URL(string: "https://vps.vautard.fr/barbarians/avatars/default.png")!
     }
 
-    // Créer un nouveau barbare
     func createBarbarian(name: String, avatarID: Int) async {
         do {
             try await barbarianRepo.createBarbarian(name: name, avatarID: avatarID)
@@ -59,7 +55,6 @@ class BarbarianViewModel: ObservableObject {
         }
     }
 
-    //  Ajouter un point de compétence
     func addPoint(to stat: String) {
         guard let bar = barbarian, bar.skill_points > 0 else { return }
         isUpdating = true

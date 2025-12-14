@@ -37,7 +37,7 @@ class LeaderboardViewModel: ObservableObject {
         }
     }
 
-    // 🔁 Rafraîchissement automatique
+    //  Rafraîchissement automatique
     func startMonitoring(interval: TimeInterval = 15) {
         stopMonitoring()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
