@@ -42,9 +42,16 @@ struct MenuView: View {
                             .font(.title2)
                             .bold()
                         
-                        Text("Exp: \(bar.exp)")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                        HStack(spacing: 10) {
+                            Text("🔥 LOVE \(bar.love)")
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.red)
+
+                            Text("EXP \(bar.exp)")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
                     }
 
                     // Points de compétence disponibles

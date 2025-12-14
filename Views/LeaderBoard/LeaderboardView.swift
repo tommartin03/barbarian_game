@@ -12,21 +12,27 @@ struct LeaderboardView: View {
     @StateObject private var lbVM = LeaderboardViewModel()
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                ForEach(lbVM.leaders) { bar in
-                    LeaderboardRow(bar: bar)
-                        .environmentObject(vm)
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(lbVM.leaders) { bar in
+                        LeaderboardRow(bar: bar)
+                            .environmentObject(vm)
+                    }
                 }
+                .padding()
             }
-            .padding()
+            .navigationTitle("🏆 Classement")
+            .navigationBarTitleDisplayMode(.inline)
+            .task {
+                // 🔥 Chargement immédiat quand on ouvre la vue
+                await lbVM.loadLeaderboard()
+                lbVM.startMonitoring()
+            }
+            .onDisappear {
+                // 🛑 Important : arrêter le timer
+                lbVM.stopMonitoring()
+            }
         }
-        .navigationTitle("🏆 Classement")
-        .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await lbVM.loadLeaderboard()
-        }
-    }
 }
 
 struct LeaderboardRow: View {
@@ -59,7 +65,7 @@ struct LeaderboardRow: View {
                     .font(.headline)
 
                 HStack(spacing: 12) {
-                    Label("\(bar.love)", systemImage: "heart.fill")
+                    Label("\(bar.love)", systemImage: "flamme.fill")
                         .foregroundColor(.red)
                     Label("\(bar.exp)", systemImage: "bolt.fill")
                         .foregroundColor(.yellow)
