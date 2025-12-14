@@ -36,20 +36,5 @@ class LeaderboardViewModel: ObservableObject {
             print("Erreur leaderboard :", error)
         }
     }
-
-    //  Rafraîchissement automatique
-    func startMonitoring(interval: TimeInterval = 15) {
-        stopMonitoring()
-        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
-            Task {
-                await self?.loadLeaderboard()
-            }
-        }
-    }
-
-    func stopMonitoring() {
-        timer?.invalidate()
-        timer = nil
-    }
 }
 

@@ -12,27 +12,22 @@ struct LeaderboardView: View {
     @StateObject private var lbVM = LeaderboardViewModel()
 
     var body: some View {
-            ScrollView {
-                VStack(spacing: 16) {
-                    ForEach(lbVM.leaders) { bar in
-                        LeaderboardRow(bar: bar)
-                            .environmentObject(vm)
-                    }
+        ScrollView {
+            VStack(spacing: 16) {
+                ForEach(lbVM.leaders) { bar in
+                    LeaderboardRow(bar: bar)
+                        .environmentObject(vm)
                 }
-                .padding()
             }
-            .navigationTitle("🏆 Classement")
-            .navigationBarTitleDisplayMode(.inline)
-            .task {
-                // Chargement immédiat quand on ouvre la vue
-                await lbVM.loadLeaderboard()
-                lbVM.startMonitoring()
-            }
-            .onDisappear {
-                // arrêter le timer
-                lbVM.stopMonitoring()
-            }
+            .padding()
         }
+        .navigationTitle("🏆 Classement")
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            // Chargement immédiat quand on ouvre la vue
+            await lbVM.loadLeaderboard()
+        }
+    }
 }
 
 struct LeaderboardRow: View {
