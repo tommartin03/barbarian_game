@@ -13,41 +13,67 @@ struct FightDetailView: View {
     @State private var showResults = false
     @Environment(\.dismiss) private var dismiss
     
+    // ID du barbare connecté
     var myBarbarianId: Int {
         vm.barbarian?.id ?? 0
     }
     
     var body: some View {
+        // Conteneur principal vertical
         VStack(spacing: 0) {
-            // En-tête avec les combattants
+            
+            // En-tête des combattants
             HStack(spacing: 30) {
+                
+                // Avatar du joueur
                 if let myBar = vm.barbarian {
-                    FighterAvatar(avatarId: myBar.avatar_id, name: myBar.name, hp: myBar.hp_max, hpColor: .green, vm: vm)
+                    FighterAvatar(
+                        avatarId: myBar.avatar_id,
+                        name: myBar.name,
+                        hp: myBar.hp_max,
+                        hpColor: .green,
+                        vm: vm
+                    )
                 }
                 
+                // Texte VS central
                 Text("VS")
                     .font(.title2)
                     .foregroundColor(.orange)
                     .bold()
                 
-                FighterAvatar(avatarId: fightResponse.opponent.avatar_id, name: fightResponse.opponent.name, hp: fightResponse.opponent.hp_max, hpColor: .red, vm: vm)
+                // Avatar de l’adversaire
+                FighterAvatar(
+                    avatarId: fightResponse.opponent.avatar_id,
+                    name: fightResponse.opponent.name,
+                    hp: fightResponse.opponent.hp_max,
+                    hpColor: .red,
+                    vm: vm
+                )
             }
             .padding(.vertical, 20)
             .padding(.horizontal)
             .frame(maxWidth: .infinity)
+            // Fond de l’en-tête
             .background(Color(.secondarySystemBackground))
             
-            // Liste des rounds
+            // Liste scrollable des rounds
             ScrollView {
+                // Colonne des rounds
                 VStack(spacing: 12) {
                     ForEach(fightResponse.log.rounds) { round in
-                        RoundRow(round: round, myBarbarianId: myBarbarianId, opponentName: fightResponse.opponent.name)
+                        // Ligne d’un round
+                        RoundRow(
+                            round: round,
+                            myBarbarianId: myBarbarianId,
+                            opponentName: fightResponse.opponent.name
+                        )
                     }
                 }
                 .padding()
             }
             
-            // Bouton résultats
+            // Bouton d’accès aux résultats
             Button(action: {
                 showResults = true
             }) {
@@ -57,34 +83,45 @@ struct FightDetailView: View {
             .buttonStyle(.borderedProminent)
             .padding()
         }
+        // Titre de navigation
         .navigationTitle("⚔️ Combat")
         .navigationBarTitleDisplayMode(.inline)
+        
+        // Fenêtre des résultats
         .sheet(isPresented: $showResults) {
-            FightResultView(fightResponse: fightResponse, onDismissAll: {
-                dismiss()
-            })
+            FightResultView(
+                fightResponse: fightResponse,
+                onDismissAll: {
+                    dismiss()
+                }
+            )
             .environmentObject(vm)
         }
     }
 }
+
 
 struct RoundRow: View {
     let round: FightRound
     let myBarbarianId: Int
     let opponentName: String
     
+    // Indique si j’attaque
     var isMyAttack: Bool {
         round.actor == myBarbarianId
     }
     
+    // Couleur des HP affichés
     var hpColor: Color {
-        // Si c'est mon attaque, la cible est l'adversaire (rouge)
-        // Sinon, la cible c'est moi (vert)
+        // Rouge si adversaire touché
+        // Vert si joueur touché
         isMyAttack ? .red : .green
     }
     
     var body: some View {
+        // Ligne horizontale du round
         HStack(spacing: 12) {
+            
             // Numéro du round
             Text("\(round.round)")
                 .font(.headline)
@@ -92,12 +129,13 @@ struct RoundRow: View {
                 .frame(width: 40, height: 40)
                 .background(Circle().fill(Color.blue))
             
-            // Description
+            // Description de l’action
             VStack(alignment: .leading, spacing: 4) {
                 Text(isMyAttack ? "Vous attaquez" : "\(opponentName) attaque")
                     .font(.subheadline)
                     .foregroundColor(isMyAttack ? .green : .red)
                 
+                // Résultat du coup
                 if round.hit {
                     Text("💥 -\(round.damage) HP")
                         .font(.caption)
@@ -112,6 +150,7 @@ struct RoundRow: View {
             
             Spacer()
             
+            // HP restants de la cible
             VStack(alignment: .trailing, spacing: 2) {
                 Text("\(round.hp_target_after)")
                     .font(.headline)
@@ -121,11 +160,13 @@ struct RoundRow: View {
                     .foregroundColor(.gray)
             }
         }
+        // Carte visuelle du round
         .padding()
         .background(Color(.secondarySystemBackground))
         .cornerRadius(10)
     }
 }
+
 
 struct FighterAvatar: View {
     let avatarId: Int
@@ -135,7 +176,10 @@ struct FighterAvatar: View {
     let vm: BarbarianViewModel
     
     var body: some View {
+        // Colonne avatar + infos
         VStack(spacing: 8) {
+            
+            // Avatar circulaire
             AsyncImage(url: vm.avatarURL(avatarID: avatarId)) { phase in
                 switch phase {
                 case .success(let image):
@@ -151,12 +195,17 @@ struct FighterAvatar: View {
                         .foregroundColor(.gray)
                 }
             }
+            
+            // Nom du combattant
             Text(name)
                 .font(.caption)
                 .bold()
+            
+            // Points de vie
             Text("\(hp) HP")
                 .font(.caption2)
                 .foregroundColor(hpColor)
         }
     }
 }
+

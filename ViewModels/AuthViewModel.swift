@@ -17,18 +17,20 @@ class AuthViewModel: ObservableObject {
 
     private let repository = AuthRepository()
 
+    //se connecter
     func login() async {
         errorMessage = ""
 
         do {
             let response = try await repository.login(username: username, password: password)
-
+            //enregistrement du token
             if let token = response.token {
                 TokenManager.shared.saveToken(token)
                 isAuthenticated = true
             } else {
                 errorMessage = response.message ?? "Identifiants invalides"
             }
+            //gestion des erreurs si la réquete envoie une erreur
         } catch let apiError as APIError {
             switch apiError {
             case .serverError(let message):
@@ -46,12 +48,13 @@ class AuthViewModel: ObservableObject {
         }
     }
 
+    //s'enregistrer
     func register() async {
         errorMessage = ""
 
         do {
             let response = try await repository.register(username: username, password: password)
-
+            //mise à jour du status de connection
             if (response.status?.lowercased() ?? "") == "ok" {
                 isRegistered = true
             } else {
@@ -72,14 +75,14 @@ class AuthViewModel: ObservableObject {
             errorMessage = error.localizedDescription
         }
     }
-    
+    //deconnexion
     func logout() async {
         do {
             try await repository.logout()
         } catch {
             print("Erreur lors de la déconnexion API: \(error)")
         }
-        
+        //nettoyage du token
         TokenManager.shared.clearToken()
         isAuthenticated = false
     }

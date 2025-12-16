@@ -15,10 +15,12 @@ class FightViewModel: ObservableObject {
     
     private let repository = FightRepository()
     
+    //lancer un combat
     func startFight() async -> Bool {
         isLoading = true
         errorMessage = ""
         
+        //lancement de la requete et interprétation de la réponse
         do {
             let response = try await repository.startFight()
             currentFight = response
@@ -30,7 +32,8 @@ class FightViewModel: ObservableObject {
             return false
         }
     }
-
+    
+    //rénitialiser un combat
     func resetFight() {
         currentFight = nil
         errorMessage = ""

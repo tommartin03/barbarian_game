@@ -13,35 +13,43 @@ struct FightResultView: View {
     @EnvironmentObject var vm: BarbarianViewModel
     @Environment(\.dismiss) private var dismiss
     
+    // Vérifie si victoire
     var isVictory: Bool {
         guard let myId = vm.barbarian?.id else { return false }
         return fightResponse.winner_id == myId
     }
     
     var body: some View {
+        // Navigation interne à la sheet
         NavigationStack {
+            
+            // Conteneur vertical principal
             VStack(spacing: 30) {
                 Spacer()
                 
-                // Icône de résultat
+                // Icône victoire / défaite
                 Image(systemName: isVictory ? "trophy.fill" : "xmark.shield.fill")
                     .font(.system(size: 80))
                     .foregroundColor(isVictory ? .yellow : .red)
                 
-                // Résultat
+                // Texte du résultat
                 Text(isVictory ? "VICTOIRE !" : "DÉFAITE")
                     .font(.system(size: 42, weight: .bold))
                     .foregroundColor(isVictory ? .green : .red)
                 
+                // Séparateur visuel
                 Divider()
                     .padding(.horizontal, 40)
                 
-                // Infos adversaire
+                // Bloc informations adversaire
                 VStack(spacing: 10) {
+                    
+                    // Titre adversaire
                     Text("Adversaire")
                         .font(.caption)
                         .foregroundColor(.gray)
                     
+                    // Avatar adversaire
                     AsyncImage(url: vm.avatarURL(avatarID: fightResponse.opponent.avatar_id)) { phase in
                         switch phase {
                         case .success(let image):
@@ -58,23 +66,28 @@ struct FightResultView: View {
                         }
                     }
                     
+                    // Nom adversaire
                     Text(fightResponse.opponent.name)
                         .font(.title2)
                         .bold()
                 }
                 
-                // EXP gagnée
+                // Bloc expérience gagnée
                 if isVictory {
                     VStack(spacing: 5) {
+                        
+                        // Label EXP
                         Text("Expérience gagnée")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
+                        // Valeur EXP
                         Text("+\(fightResponse.exp_gain) EXP")
                             .font(.system(size: 32, weight: .bold))
                             .foregroundColor(.orange)
                     }
                     .padding()
+                    // Carte EXP stylisée
                     .background(
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.orange.opacity(0.1))
@@ -83,11 +96,11 @@ struct FightResultView: View {
                 
                 Spacer()
                 
-                // Bouton retour
+                // Bouton retour menu
                 Button(action: {
                     dismiss() // Ferme la sheet
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        onDismissAll() // Puis ferme FightDetailView
+                        onDismissAll() // Ferme vue combat
                     }
                 }) {
                     Text("Retour au menu")
@@ -101,6 +114,7 @@ struct FightResultView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
             }
+            // Titre de navigation
             .navigationTitle("Résultat")
             .navigationBarTitleDisplayMode(.inline)
         }

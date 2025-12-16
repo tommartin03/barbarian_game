@@ -10,10 +10,12 @@ import Foundation
 struct EmptyResponse: Decodable {}
 
 class BarbarianRepository {
+    //recuperation de son barbare
     func getMyBarbarian() async throws -> Barbarian {
         try await APIClient.shared.request(.get_my_barbarian, body: nil)
     }
 
+    //création du babare
     func createBarbarian(name: String, avatarID: Int) async throws -> Barbarian {
         try await APIClient.shared.request(
             .create_or_reset_barbarian,
@@ -21,6 +23,7 @@ class BarbarianRepository {
         )
     }
     
+    //suprimer le babare
     func resetBarbarian(name: String) async throws {
             let body: [String: String] = ["name": name]
             
@@ -30,6 +33,7 @@ class BarbarianRepository {
             )
         }
     
+    //modification des points de compétences
     func spendSkillPoints(
             attack: Int,
             defense: Int,
@@ -43,7 +47,7 @@ class BarbarianRepository {
                 "evasion": evasion
             ]
 
-            // Spécifier le type générique pour que Swift sache quoi décoder
+            //spécifier le type générique pour que Swift sache quoi décoder
             let _: EmptyResponse = try await APIClient.shared.request(
                 .spend_skill_points,
                 body: body

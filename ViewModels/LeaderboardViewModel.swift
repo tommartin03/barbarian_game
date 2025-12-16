@@ -14,17 +14,15 @@ class LeaderboardViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage = ""
 
-    private var timer: Timer?
-
     func loadLeaderboard() async {
         isLoading = true
         defer { isLoading = false }
-
+        //création et récupération du classement
         do {
             let repo = LeaderboardRepository()
             let result = try await repo.getLeaderboard()
 
-            // Tri LOVE puis EXP
+            //trie en fonction du love puis le l'xp
             leaders = result.sorted {
                 if $0.love == $1.love {
                     return $0.exp > $1.exp

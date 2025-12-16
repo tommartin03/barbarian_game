@@ -14,10 +14,13 @@ class FightHistoryViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var newFightNotification: FightHistoryEntry? = nil
     
+    
     private var timer: Timer?
     
+    //charger l'historique
     func loadHistory() async {
         isLoading = true
+        //création de l'hitorique et gestion de la réponse
         do {
             let repo = FightRepository()
             history = try await repo.getFightHistory() ?? []
@@ -33,6 +36,7 @@ class FightHistoryViewModel: ObservableObject {
         for i in 0..<history.count {
             let entry = history[i]
             
+            //récupréation des noms et des avatars de l'attaquant
             do {
                 let attacker: Barbarian = try await APIClient.shared.request(.get_barbarian(id: entry.attacker_id))
                 history[i].attackerName = attacker.name
@@ -40,7 +44,7 @@ class FightHistoryViewModel: ObservableObject {
             } catch {
                 print("Erreur chargement attaquant \(entry.attacker_id):", error)
             }
-            
+            //récupréation des noms et des avatars du defenseur
             do {
                 let defender: Barbarian = try await APIClient.shared.request(.get_barbarian(id: entry.defender_id))
                 history[i].defenderName = defender.name
@@ -51,7 +55,7 @@ class FightHistoryViewModel: ObservableObject {
         }
     }
     
-    // Lance la vérification régulière uniquement si l'app est visible
+    //lance la vérification régulière uniquement si l'app est visible
     func startMonitoring(interval: TimeInterval = 15) {
         stopMonitoring()
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
@@ -66,7 +70,7 @@ class FightHistoryViewModel: ObservableObject {
         timer = nil
     }
     
-    // Vérifie si un nouveau combat est apparu
+    //vérifie si un nouveau combat est apparu
     private func checkForNewFights() async {
         do {
             let repo = FightRepository()

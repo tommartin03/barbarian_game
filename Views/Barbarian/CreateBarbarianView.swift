@@ -13,25 +13,29 @@ struct CreateBarbarianView: View {
     @State private var goToMenu = false
 
     var body: some View {
+        // Conteneur principal
         VStack(spacing: 0) {
             Spacer()
             
-            // Titre
+            // Titre de création
             Text("Créer votre barbare")
                 .font(.largeTitle)
                 .bold()
                 .padding(.bottom, 30)
             
-            // Carte grise
+            // Carte de création
             VStack(spacing: 20) {
+                
                 // Label avatars
                 Text("Choisissez un avatar")
                     .font(.headline)
                 
-                // Avatars
+                // Liste des avatars
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
                         ForEach(vm.avatars) { avatar in
+                            
+                            // Image avatar
                             AsyncImage(url: avatar.fullURL) { image in
                                 image
                                     .resizable()
@@ -42,8 +46,12 @@ struct CreateBarbarianView: View {
                             .frame(width: 80, height: 80)
                             .clipShape(Circle())
                             .overlay(
+                                // Bordure sélection
                                 Circle()
-                                    .stroke(selectedAvatar == avatar.id ? Color.blue : Color.gray, lineWidth: 3)
+                                    .stroke(
+                                        selectedAvatar == avatar.id ? Color.blue : Color.gray,
+                                        lineWidth: 3
+                                    )
                             )
                             .onTapGesture {
                                 selectedAvatar = avatar.id
@@ -53,10 +61,11 @@ struct CreateBarbarianView: View {
                     .padding(.horizontal)
                 }
                 
+                // Séparateur visuel
                 Divider()
                     .padding(.vertical, 10)
                 
-                // Nom
+                // Saisie du nom
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Nom du barbare")
                         .font(.headline)
@@ -71,7 +80,7 @@ struct CreateBarbarianView: View {
             .cornerRadius(15)
             .padding(.horizontal, 30)
             
-            // Bouton
+            // Bouton de validation
             Button {
                 guard let avatarID = selectedAvatar, !name.isEmpty else { return }
                 Task {
@@ -90,11 +99,16 @@ struct CreateBarbarianView: View {
             Spacer()
             Spacer()
         }
+        
+        // Chargement des avatars
         .task {
             await vm.loadAvatars()
         }
+        
+        // Navigation vers menu
         .fullScreenCover(isPresented: $goToMenu) {
             MenuView()
         }
     }
 }
+

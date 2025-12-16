@@ -10,6 +10,7 @@ struct Avatar: Codable, Identifiable {
     let id: Int
     let image_path: String
 
+    //url de base
     var fullURL: URL {
         URL(string: "https://vps.vautard.fr/" + image_path)!
     }
@@ -17,6 +18,7 @@ struct Avatar: Codable, Identifiable {
 
 
 class AvatarRepository {
+    //recuperation de l'avatar
     func getAvatars() async throws -> [Avatar] {
         try await APIClient.shared.request(.get_avatars, body: nil as [String: Any]?)
     }

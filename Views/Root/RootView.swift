@@ -14,36 +14,50 @@ struct RootView: View {
     @State private var isLoading = false
 
     var body: some View {
+        // Conteneur principal qui change de vue
         Group {
+            
+            // Si utilisateur connecté
             if authVm.isAuthenticated {
+                
+                // Affichage loading
                 if isLoading {
                     ProgressView("Chargement...")
                 }
+                
+                // Si barbare existant
                 else if let _ = barbarianVm.barbarian {
-                    MenuView()
-                }
-                else {
-                    CreateBarbarianView()
+                    MenuView() // Affiche le menu principal
                 }
                 
-            } else {
-                LoginView()
+                // Sinon création barbare
+                else {
+                    CreateBarbarianView() // Création du barbare
+                }
+                
+            }
+            
+            // Sinon connexion
+            else {
+                LoginView() // Page de login
             }
         }
+        // Tâche de chargement des données
         .task(id: authVm.isAuthenticated) {
             if authVm.isAuthenticated {
-                await loadPlayerData()
+                await loadPlayerData() // Récupère avatars + barbare
             } else {
-                barbarianVm.barbarian = nil
+                barbarianVm.barbarian = nil // Reset barbare si déconnecté
             }
         }
     }
     
+    // Fonction chargement données joueur
     private func loadPlayerData() async {
         isLoading = true
         
-        await barbarianVm.loadAvatars()
-        await barbarianVm.loadBarbarian()
+        await barbarianVm.loadAvatars()  // Charger avatars
+        await barbarianVm.loadBarbarian() // Charger barbare actuel
         
         isLoading = false
     }

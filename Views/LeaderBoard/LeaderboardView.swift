@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct LeaderboardView: View {
-    @EnvironmentObject var vm: BarbarianViewModel  // pour avatarURL()
+    @EnvironmentObject var vm: BarbarianViewModel
     @StateObject private var lbVM = LeaderboardViewModel()
 
+    //corps principale de la page
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -33,8 +34,11 @@ struct LeaderboardView: View {
 struct LeaderboardRow: View {
     @EnvironmentObject var vm: BarbarianViewModel
     let bar: LeaderboardBarbarian
-
+    
+    //corps de l'affichage
     var body: some View {
+        
+        //Avatar du barbare
         HStack(spacing: 16) {
 
             AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
@@ -53,7 +57,7 @@ struct LeaderboardRow: View {
                 }
             }
 
-            // --- Infos joueur ---
+            //infos joueur ---
             VStack(alignment: .leading, spacing: 4) {
                 Text(bar.name)
                     .font(.headline)
@@ -83,7 +87,8 @@ struct LeaderboardRow: View {
         .cornerRadius(14)
         .shadow(radius: 2)
     }
-
+    
+    //affiche le statistique sous une certain forme 
     private func stat(_ emoji: String, _ value: Int) -> some View {
         HStack(spacing: 4) {
             Text(emoji)

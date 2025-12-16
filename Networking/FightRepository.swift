@@ -8,9 +8,11 @@
 import Foundation
 
 class FightRepository {
+    //commencer un combat
     func startFight() async throws -> FightResponse {
         try await APIClient.shared.request(.fight)
     }
+    //recuperer l'historique
     func getFightHistory() async throws -> [FightHistoryEntry] {
         try await APIClient.shared.request(.get_fight_history)
     }

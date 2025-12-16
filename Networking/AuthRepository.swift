@@ -8,6 +8,7 @@
 import Foundation
 
 class AuthRepository {
+    //s'inscrire
     func register(username: String, password: String) async throws -> AuthResponse {
         try await APIClient.shared.request(
             .register,
@@ -15,6 +16,7 @@ class AuthRepository {
         )
     }
 
+    //se connecter
     func login(username: String, password: String) async throws -> AuthResponse {
         try await APIClient.shared.request(
             .login,
@@ -22,6 +24,7 @@ class AuthRepository {
         )
     }
     
+    //se déconnecter
     func logout() async throws -> AuthResponse {
             try await APIClient.shared.request(.logout)
         }

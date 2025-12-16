@@ -10,17 +10,19 @@ import SwiftUI
 class BarbarianViewModel: ObservableObject {
     @Published var barbarian: Barbarian? = nil
     @Published var avatars: [Avatar] = []
-    @Published var isLoading = false
-    @Published var isUpdating = false // Pour gérer le loader sur ajout de point
+    @Published var isLoading = false  //pour gerer le chargement
+    @Published var isUpdating = false //pour gérer le loader sur ajout de point
     
-
+    //les répository utilisé dans ce view model
     private let barbarianRepo = BarbarianRepository()
     private let avatarRepo = AvatarRepository()
-
+    
+    //charger un barbare et ses compétences
     func loadBarbarian() async {
         isLoading = true
         defer { isLoading = false }
         
+        //récupération du barbare
         do {
             let bar = try await barbarianRepo.getMyBarbarian()
             self.barbarian = bar
@@ -30,6 +32,7 @@ class BarbarianViewModel: ObservableObject {
         }
     }
     
+    //récupération de l'avatar
     func loadAvatars() async {
         do {
             let allAvatars = try await avatarRepo.getAvatars()
@@ -38,7 +41,8 @@ class BarbarianViewModel: ObservableObject {
             print("Erreur en chargeant les avatars :", error)
         }
     }
-
+    
+    //construction de l'url
     func avatarURL(avatarID: Int) -> URL {
         if let avatar = avatars.first(where: { $0.id == avatarID }) {
             return avatar.fullURL
@@ -46,6 +50,7 @@ class BarbarianViewModel: ObservableObject {
         return URL(string: "https://vps.vautard.fr/barbarians/avatars/default.png")!
     }
 
+    //création d'un barbare
     func createBarbarian(name: String, avatarID: Int) async {
         do {
             try await barbarianRepo.createBarbarian(name: name, avatarID: avatarID)
@@ -55,6 +60,7 @@ class BarbarianViewModel: ObservableObject {
         }
     }
     
+    //rénitialisation du babare
     func resetBarbarian() async {
         guard let bar = barbarian else { return }
         isUpdating = true
@@ -67,6 +73,7 @@ class BarbarianViewModel: ObservableObject {
         }
     }
 
+    //ajout des points de compétence
     func addPoint(to stat: String) {
         guard let bar = barbarian, bar.skill_points > 0 else { return }
         isUpdating = true
@@ -92,7 +99,7 @@ class BarbarianViewModel: ObservableObject {
                     accuracy: accuracy,
                     evasion: evasion
                 )
-                // Recharger le barbare pour mettre à jour les stats et skill_points
+                //recharger le barbare pour mettre à jour les stats et skill_points
                 let updatedBar = try await barbarianRepo.getMyBarbarian()
                 self.barbarian = updatedBar
             } catch {
