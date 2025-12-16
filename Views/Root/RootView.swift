@@ -14,50 +14,50 @@ struct RootView: View {
     @State private var isLoading = false
 
     var body: some View {
-        // Conteneur principal qui change de vue
+        // conteneur principal qui change de vue
         Group {
             
-            // Si utilisateur connecté
+            //si utilisateur connecté
             if authVm.isAuthenticated {
                 
-                // Affichage loading
+                //affichage loading
                 if isLoading {
                     ProgressView("Chargement...")
                 }
                 
-                // Si barbare existant
+                //si barbare existant
                 else if let _ = barbarianVm.barbarian {
-                    MenuView() // Affiche le menu principal
+                    MenuView() // affiche le menu principal
                 }
                 
-                // Sinon création barbare
+                //sinon création barbare
                 else {
-                    CreateBarbarianView() // Création du barbare
+                    CreateBarbarianView() // création du barbare
                 }
                 
             }
             
-            // Sinon connexion
+            //sinon connexion
             else {
-                LoginView() // Page de login
+                LoginView() //page de login
             }
         }
-        // Tâche de chargement des données
+        //tâche de chargement des données
         .task(id: authVm.isAuthenticated) {
             if authVm.isAuthenticated {
-                await loadPlayerData() // Récupère avatars + barbare
+                await loadPlayerData() //récupère avatars + barbare
             } else {
-                barbarianVm.barbarian = nil // Reset barbare si déconnecté
+                barbarianVm.barbarian = nil //reset barbare si déconnecté
             }
         }
     }
     
-    // Fonction chargement données joueur
+    //fonction chargement données joueur
     private func loadPlayerData() async {
         isLoading = true
         
-        await barbarianVm.loadAvatars()  // Charger avatars
-        await barbarianVm.loadBarbarian() // Charger barbare actuel
+        await barbarianVm.loadAvatars()  //charger avatars
+        await barbarianVm.loadBarbarian() //charger barbare actuel
         
         isLoading = false
     }

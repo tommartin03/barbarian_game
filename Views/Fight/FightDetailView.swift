@@ -13,19 +13,18 @@ struct FightDetailView: View {
     @State private var showResults = false
     @Environment(\.dismiss) private var dismiss
     
-    // ID du barbare connecté
+    //id du barbare connecté
     var myBarbarianId: Int {
         vm.barbarian?.id ?? 0
     }
     
     var body: some View {
-        // Conteneur principal vertical
         VStack(spacing: 0) {
             
-            // En-tête des combattants
+            //en-tête des combattants
             HStack(spacing: 30) {
                 
-                // Avatar du joueur
+                //avatar du joueur
                 if let myBar = vm.barbarian {
                     FighterAvatar(
                         avatarId: myBar.avatar_id,
@@ -36,13 +35,13 @@ struct FightDetailView: View {
                     )
                 }
                 
-                // Texte VS central
+                //texte VS central
                 Text("VS")
                     .font(.title2)
                     .foregroundColor(.orange)
                     .bold()
                 
-                // Avatar de l’adversaire
+                //avatar de l’adversaire
                 FighterAvatar(
                     avatarId: fightResponse.opponent.avatar_id,
                     name: fightResponse.opponent.name,
@@ -54,15 +53,14 @@ struct FightDetailView: View {
             .padding(.vertical, 20)
             .padding(.horizontal)
             .frame(maxWidth: .infinity)
-            // Fond de l’en-tête
+            //fond de l’en-tête
             .background(Color(.secondarySystemBackground))
             
-            // Liste scrollable des rounds
+            //liste scrollable des rounds
             ScrollView {
-                // Colonne des rounds
                 VStack(spacing: 12) {
                     ForEach(fightResponse.log.rounds) { round in
-                        // Ligne d’un round
+                        //ligne d’un round
                         RoundRow(
                             round: round,
                             myBarbarianId: myBarbarianId,
@@ -73,7 +71,7 @@ struct FightDetailView: View {
                 .padding()
             }
             
-            // Bouton d’accès aux résultats
+            //bouton d’accès aux résultats
             Button(action: {
                 showResults = true
             }) {
@@ -83,11 +81,11 @@ struct FightDetailView: View {
             .buttonStyle(.borderedProminent)
             .padding()
         }
-        // Titre de navigation
+        //titre de navigation
         .navigationTitle("⚔️ Combat")
         .navigationBarTitleDisplayMode(.inline)
         
-        // Fenêtre des résultats
+        //fenêtre des résultats
         .sheet(isPresented: $showResults) {
             FightResultView(
                 fightResponse: fightResponse,

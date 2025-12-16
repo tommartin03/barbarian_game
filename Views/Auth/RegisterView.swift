@@ -13,31 +13,31 @@ struct RegisterView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        // Conteneur principal
+        //conteneur principal
         VStack(spacing: 0) {
             Spacer()
             
-            // Titre inscription
+            //titre inscription
             Text("Créer un compte")
                 .font(.largeTitle)
                 .bold()
                 .padding(.bottom, 50)
             
-            // Formulaire utilisateur
+            //formulaire utilisateur
             VStack(spacing: 15) {
                 
-                // Champ nom utilisateur
+                //champ nom utilisateur
                 TextField("Username", text: $vm.username)
                     .textFieldStyle(.roundedBorder)
                     .autocapitalization(.none)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled(true)
 
-                // Champ mot de passe
+                //champ mot de passe
                 SecureField("Password", text: $vm.password)
                     .textFieldStyle(.roundedBorder)
 
-                // Message d’erreur API
+                //message d’erreur API
                 if !vm.errorMessage.isEmpty {
                     Text(vm.errorMessage)
                         .foregroundColor(.red)
@@ -47,7 +47,7 @@ struct RegisterView: View {
             }
             .padding(.horizontal, 30)
             
-            // Bouton inscription
+            //bouton inscription
             Button {
                 Task {
                     await vm.register()
@@ -67,7 +67,7 @@ struct RegisterView: View {
             Spacer()
         }
         
-        // Alerte succès inscription
+        //alerte succès inscription
         .alert("Inscription réussie", isPresented: $showSuccessAlert) {
             Button("OK") {
                 dismiss()

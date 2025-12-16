@@ -7,7 +7,7 @@
 import Foundation
 
 class LeaderboardRepository {
-    //récupération du leaderborad
+    //récupération du leaderboard
     func getLeaderboard() async throws -> [LeaderboardBarbarian] {
         try await APIClient.shared.request(.leaderboard, body: nil as [String: Any]?)
     }

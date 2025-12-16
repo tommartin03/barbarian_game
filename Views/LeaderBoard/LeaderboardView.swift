@@ -25,7 +25,7 @@ struct LeaderboardView: View {
         .navigationTitle("🏆 Classement")
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            // Chargement immédiat quand on ouvre la vue
+            //chargement immédiat quand on ouvre la vue
             await lbVM.loadLeaderboard()
         }
     }
@@ -38,7 +38,7 @@ struct LeaderboardRow: View {
     //corps de l'affichage
     var body: some View {
         
-        //Avatar du barbare
+        //avatar du barbare
         HStack(spacing: 16) {
 
             AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
@@ -57,7 +57,7 @@ struct LeaderboardRow: View {
                 }
             }
 
-            //infos joueur ---
+            //infos joueur
             VStack(alignment: .leading, spacing: 4) {
                 Text(bar.name)
                     .font(.headline)
@@ -70,7 +70,7 @@ struct LeaderboardRow: View {
                 }
                 .font(.subheadline)
 
-                // Stats
+                //stats
                 HStack(spacing: 10) {
                     stat("⚔️", bar.attack)
                     stat("🛡️", bar.defense)
@@ -88,7 +88,7 @@ struct LeaderboardRow: View {
         .shadow(radius: 2)
     }
     
-    //affiche le statistique sous une certain forme 
+    //affiche le statistique sous une certaine forme
     private func stat(_ emoji: String, _ value: Int) -> some View {
         HStack(spacing: 4) {
             Text(emoji)

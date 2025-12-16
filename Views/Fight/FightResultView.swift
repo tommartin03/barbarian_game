@@ -13,43 +13,42 @@ struct FightResultView: View {
     @EnvironmentObject var vm: BarbarianViewModel
     @Environment(\.dismiss) private var dismiss
     
-    // Vérifie si victoire
+    //vérifie si victoire
     var isVictory: Bool {
         guard let myId = vm.barbarian?.id else { return false }
         return fightResponse.winner_id == myId
     }
     
     var body: some View {
-        // Navigation interne à la sheet
+        //navigation interne à la sheet
         NavigationStack {
             
-            // Conteneur vertical principal
             VStack(spacing: 30) {
                 Spacer()
                 
-                // Icône victoire / défaite
+                //icône victoire / défaite
                 Image(systemName: isVictory ? "trophy.fill" : "xmark.shield.fill")
                     .font(.system(size: 80))
                     .foregroundColor(isVictory ? .yellow : .red)
                 
-                // Texte du résultat
+                //texte du résultat
                 Text(isVictory ? "VICTOIRE !" : "DÉFAITE")
                     .font(.system(size: 42, weight: .bold))
                     .foregroundColor(isVictory ? .green : .red)
                 
-                // Séparateur visuel
+                //séparateur visuel
                 Divider()
                     .padding(.horizontal, 40)
                 
-                // Bloc informations adversaire
+                //bloc informations adversaire
                 VStack(spacing: 10) {
                     
-                    // Titre adversaire
+                    //titre adversaire
                     Text("Adversaire")
                         .font(.caption)
                         .foregroundColor(.gray)
                     
-                    // Avatar adversaire
+                    //avatar adversaire
                     AsyncImage(url: vm.avatarURL(avatarID: fightResponse.opponent.avatar_id)) { phase in
                         switch phase {
                         case .success(let image):
@@ -66,28 +65,28 @@ struct FightResultView: View {
                         }
                     }
                     
-                    // Nom adversaire
+                    //nom adversaire
                     Text(fightResponse.opponent.name)
                         .font(.title2)
                         .bold()
                 }
                 
-                // Bloc expérience gagnée
+                //bloc expérience gagnée
                 if isVictory {
                     VStack(spacing: 5) {
                         
-                        // Label EXP
+                        //label EXP
                         Text("Expérience gagnée")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
-                        // Valeur EXP
+                        //valeur EXP
                         Text("+\(fightResponse.exp_gain) EXP")
                             .font(.system(size: 32, weight: .bold))
                             .foregroundColor(.orange)
                     }
                     .padding()
-                    // Carte EXP stylisée
+                    //carte EXP stylisée
                     .background(
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.orange.opacity(0.1))
@@ -96,11 +95,11 @@ struct FightResultView: View {
                 
                 Spacer()
                 
-                // Bouton retour menu
+                //bouton retour menu
                 Button(action: {
-                    dismiss() // Ferme la sheet
+                    dismiss() // ferme la sheet
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        onDismissAll() // Ferme vue combat
+                        onDismissAll() // ferme vue combat
                     }
                 }) {
                     Text("Retour au menu")
@@ -114,7 +113,7 @@ struct FightResultView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
             }
-            // Titre de navigation
+            //titre de navigation
             .navigationTitle("Résultat")
             .navigationBarTitleDisplayMode(.inline)
         }

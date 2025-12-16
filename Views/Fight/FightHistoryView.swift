@@ -11,32 +11,32 @@ struct FightHistoryView: View {
     @StateObject var vm = FightHistoryViewModel()
     @EnvironmentObject var barbarianVm: BarbarianViewModel
     
-    // ID du barbare connecté
+    //is du barbare connecté
     var myId: Int {
         barbarianVm.barbarian?.id ?? 0
     }
 
     var body: some View {
-        // Scroll principal de l’écran
+        //scroll principal de l’écran
         ScrollView {
-            // Colonne des combats
+            //colonne des combats
             VStack(spacing: 16) {
                 
-                // Indicateur de chargement
+                //indicateur de chargement
                 if vm.isLoading {
                     ProgressView("Chargement...")
                         .padding()
                 
-                // Message si aucun combat
+                //message si aucun combat
                 } else if vm.history.isEmpty {
                     Text("Aucun combat pour le moment")
                         .foregroundColor(.gray)
                         .padding(.top, 100)
                 
-                // Liste des combats
+                //liste des combats
                 } else {
                     ForEach(vm.history) { entry in
-                        // Ligne d’un combat
+                        //ligne d’un combat
                         FightHistoryRow(entry: entry, myId: myId)
                             .environmentObject(barbarianVm)
                     }
@@ -44,11 +44,11 @@ struct FightHistoryView: View {
             }
             .padding()
         }
-        // Titre de la navigation
+        //titre de la navigation
         .navigationTitle("⚔️ Historique")
         .navigationBarTitleDisplayMode(.inline)
         
-        // Chargement initial
+        //chargement initial
         .task {
             await vm.loadHistory()
         }

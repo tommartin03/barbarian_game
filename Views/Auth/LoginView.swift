@@ -11,33 +11,33 @@ struct LoginView: View {
     @EnvironmentObject var authVm: AuthViewModel
 
     var body: some View {
-        // Navigation principale
+        //bavigation principale
         NavigationStack {
             
-            // Conteneur principal
+            //conteneur principal
             VStack(spacing: 0) {
                 Spacer()
                 
-                // Titre du jeu
+                //titre du jeu
                 Text("Barbarian Game")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 50)
                 
-                // Formulaire de connexion
+                //formulaire de connexion
                 VStack(spacing: 15) {
                     
-                    // Champ nom utilisateur
+                    //champ nom utilisateur
                     TextField("Username", text: $authVm.username)
                         .textFieldStyle(.roundedBorder)
                         .autocapitalization(.none)
                         .autocorrectionDisabled(true)
 
-                    // Champ mot de passe
+                    //champ mot de passe
                     SecureField("Password", text: $authVm.password)
                         .textFieldStyle(.roundedBorder)
 
-                    // Message erreur authentification
+                    //message erreur authentification
                     if !authVm.errorMessage.isEmpty {
                         Text(authVm.errorMessage)
                             .foregroundColor(.red)
@@ -47,10 +47,10 @@ struct LoginView: View {
                 }
                 .padding(.horizontal, 30)
                 
-                // Boutons actions utilisateur
+                //boutons actions utilisateur
                 VStack(spacing: 12) {
                     
-                    // Bouton connexion API
+                    //bouton connexion API
                     Button {
                         Task { await authVm.login() }
                     } label: {
@@ -59,7 +59,7 @@ struct LoginView: View {
                     }
                     .buttonStyle(.borderedProminent)
 
-                    // Navigation vers inscription
+                    //navigation vers inscription
                     NavigationLink {
                         RegisterView()
                     } label: {
