@@ -17,7 +17,7 @@ struct LeaderboardView: View {
             VStack(spacing: 16) {
                 ForEach(lbVM.leaders) { bar in
                     LeaderboardRow(bar: bar)
-                        .environmentObject(vm)
+                        .environmentObject(vm) //toutes les vues enfants peuvent y accéder sans le passer en paramètre
                 }
             }
             .padding()
@@ -41,7 +41,7 @@ struct LeaderboardRow: View {
         //avatar du barbare
         HStack(spacing: 16) {
 
-            AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in
+            AsyncImage(url: vm.avatarURL(avatarID: bar.avatar_id)) { phase in //async pour ne pas bloquer le reste en chargeant l'image
                 switch phase {
                 case .success(let image):
                     image

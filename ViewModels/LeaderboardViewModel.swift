@@ -15,8 +15,7 @@ class LeaderboardViewModel: ObservableObject {
     @Published var errorMessage = ""
 
     func loadLeaderboard() async {
-        isLoading = true
-        defer { isLoading = false }
+        
         //création et récupération du classement
         do {
             let repo = LeaderboardRepository()

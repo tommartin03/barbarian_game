@@ -31,10 +31,10 @@ struct MenuView: View {
                         switch phase {
                         case .success(let image):
                             image
-                                .resizable()
+                                .resizable() //doit etre redimentionnée
                                 .scaledToFill()
                                 .frame(width: 100, height: 100)
-                                .clipShape(Circle())
+                                .clipShape(Circle()) //on affiche dans un cercle
                         default:
                             Image(systemName: "person.circle.fill")
                                 .resizable()
